@@ -1,4 +1,7 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "spotify-consumer": "apps/spotify-consumer",
+    "spotify-consumer-e2e": "apps/spotify-consumer-e2e"
+  }
 }
