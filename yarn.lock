@@ -5583,6 +5583,11 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+solid-app-router@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/solid-app-router/-/solid-app-router-0.3.0.tgz#c06aba1c170649a65b3511210769020d973e3bc9"
+  integrity sha512-427qO9W90HH3coVq3a25xlL0B8dv+FKQcGQE3v5z5Z+8+u00svhOEQoM3Yj8W0C0xhGKSh2mKSIhpjUGQ7C68g==
+
 solid-jest@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/solid-jest/-/solid-jest-0.2.0.tgz#3534a3a36151a3d19ef50fa63623ba79c1e0b25f"
