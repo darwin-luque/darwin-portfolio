@@ -1,6 +1,7 @@
 import styles from './react-ui.module.css';
 
 export * from './carousel/carousel';
+export * from './card/card';
 
 /* eslint-disable-next-line */
 export interface ReactUiProps {}
