@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@darwin-portfolio/react/hooks": ["libs/react/hooks/src/index.ts"],
       "@darwin-portfolio/react/ui": ["libs/react/ui/src/index.ts"]
     }
   },

@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "react-hook": "libs/react/hooks",
     "react-ui": "libs/react/ui",
     "spotify-consumer": "apps/spotify-consumer",
     "spotify-consumer-e2e": "apps/spotify-consumer-e2e"

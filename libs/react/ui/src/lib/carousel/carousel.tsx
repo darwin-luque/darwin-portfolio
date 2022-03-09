@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import classes from './carousel.module.css';
 
 const variants: Variants = {
@@ -93,4 +93,4 @@ export const Carousel = <T extends { id: number | string }>({
   );
 };
 
-export default Carousel;
+export default memo(Carousel);
