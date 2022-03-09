@@ -22,7 +22,7 @@ const NewReleasesGallery = () => {
   useEffect(() => {
     const success: PositionCallback = async (pos) => {
       const geolocation: AxiosResponse<GeolocationResponse> = await axios.get(
-        `${process.env['REACT_APP_GEOLOCATION']}&lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`
+        `${process.env['NX_GEOLOCATION']}&lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`
       );
       setCountryCode(geolocation.data.countryCode);
     };

@@ -1,0 +1,29 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+}
+
+.artist {
+  color: var(--color-4);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-shadow: -0.5px 0.5px 0 #000,
+				  0.5px 0.5px 0 #000,
+				 0.5px -0.5px 0 #000,
+				-0.5px -0.5px 0 #000;
+}
+
+.title {
+  color: var(--color-4);
+  margin: 8px 0;
+  letter-spacing: 0.8px;
+  width: 100%;
+  word-wrap: break-word;
+  text-shadow: -0.8px 0.8px 0 #000,
+				  0.8px 0.8px 0 #000,
+				 0.8px -0.8px 0 #000,
+				-0.8px -0.8px 0 #000;
+}
