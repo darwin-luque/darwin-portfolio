@@ -1,7 +1,9 @@
+import Router from '../router/router';
+
 export function App() {
   return (
     <>
-      <h1>Spotify Consumer</h1>
+      <Router />
     </>
   );
 }
