@@ -1,0 +1,51 @@
+.container {
+  --arrow-width: 40px;
+  position: relative;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-3);
+  padding: 2rem 0;
+}
+
+.next,
+.prev {
+  background-color: transparent;
+  border: none;
+  top: calc(50% - calc(var(--arrow-width) / 2));
+  position: absolute;
+  background: var(--color-4);
+  border-radius: 30px;
+  width: var(--arrow-width);
+  height: var(--arrow-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5rem;
+  z-index: 2;
+}
+
+.next {
+  right: calc(var(--arrow-width) / 4);
+}
+
+.prev {
+  left: calc(var(--arrow-width) / 4);
+  transform: scale(-1);
+}
+
+.items {
+  width: calc(100vw - calc(var(--arrow-width) * 3));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  width: 23%;
+  margin: 0 0.2rem;
+}
