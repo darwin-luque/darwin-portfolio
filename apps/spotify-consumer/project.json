@@ -1,0 +1,73 @@
+{
+  "root": "apps/spotify-consumer",
+  "sourceRoot": "apps/spotify-consumer/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/spotify-consumer",
+        "index": "apps/spotify-consumer/src/index.html",
+        "baseHref": "/",
+        "main": "apps/spotify-consumer/src/main.tsx",
+        "polyfills": "apps/spotify-consumer/src/polyfills.ts",
+        "tsConfig": "apps/spotify-consumer/tsconfig.app.json",
+        "assets": [
+          "apps/spotify-consumer/src/favicon.ico",
+          "apps/spotify-consumer/src/assets"
+        ],
+        "styles": ["apps/spotify-consumer/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/spotify-consumer/src/environments/environment.ts",
+              "with": "apps/spotify-consumer/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "spotify-consumer:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "spotify-consumer:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/spotify-consumer/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/spotify-consumer"],
+      "options": {
+        "jestConfig": "apps/spotify-consumer/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
