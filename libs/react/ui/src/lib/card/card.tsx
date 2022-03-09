@@ -21,7 +21,7 @@ interface CardProps {
   onToggle?: (state: 'add' | 'remove') => void;
 }
 
-const Card = ({
+export const Card = ({
   children,
   onClick,
   onToggle,
