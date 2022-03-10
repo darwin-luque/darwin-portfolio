@@ -3,7 +3,7 @@
   padding: 1rem 2rem;
   background-color: var(--color-1);
   color: var(--color-4);
-  max-height: 200px;
+  max-height: 150px;
   height: var(--navbar-height);
   display: flex;
   align-items: center;

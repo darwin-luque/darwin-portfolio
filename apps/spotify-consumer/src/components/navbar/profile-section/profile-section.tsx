@@ -11,11 +11,20 @@ const ProfileSection = ({ user, onSignIn }: ProfileSectionProps) => (
   <div className={classes['profile-section']}>
     {!!user ? (
       <>
-        <img className={classes['avatar']} src={user.images[0].url} alt="user avatar" />
+        <img
+          className={classes['avatar']}
+          src={user.images[0].url}
+          alt="user avatar"
+        />
         <p className={classes['name']}>{user.display_name}</p>
       </>
     ) : (
-      <motion.button className={classes['message']} onClick={onSignIn}>
+      <motion.button
+        className={classes['message']}
+        onClick={onSignIn}
+        whileHover={{ scale: 1.02, cursor: 'pointer' }}
+        whileTap={{ scale: 0.98 }}
+      >
         Sign in with Spotify first
       </motion.button>
     )}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import ProfileSection from './profile-section/profile-section';
-import NavbarElement from './navbar-element/navbar-elements';
+import NavbarElement from './navbar-element/navbar-element';
 import SearchBar from './search-bar/search-bar';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { findTracksAction } from '../../store/actions/music.action';
@@ -17,7 +17,7 @@ const pagesElements = [
   },
   {
     id: 1,
-    name: 'Library',
+    name: 'My Library',
     to: '/library',
   },
 ];
@@ -53,6 +53,8 @@ const Navbar = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
+  console.log(user);
+
   return (
     <nav className={classes['navbar']}>
       <ProfileSection user={user} onSignIn={signInHandler} />
@@ -60,15 +62,18 @@ const Navbar = () => {
         {pagesElements.map((element) => (
           <NavbarElement
             {...element}
+            show={element.to === '/library' ? !!user : true}
             selected={location.pathname === element.to}
             key={element.id}
           />
         ))}
-        <SearchBar
-          showBar={showSearchBar}
-          onToggleBar={setShowSearchBar}
-          onInputChange={setSearchValue}
-        />
+        {location.pathname === '/' && !!user && (
+          <SearchBar
+            showBar={showSearchBar}
+            onToggleBar={setShowSearchBar}
+            onInputChange={setSearchValue}
+          />
+        )}
       </div>
     </nav>
   );
