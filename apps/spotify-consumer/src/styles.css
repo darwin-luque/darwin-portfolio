@@ -25,6 +25,7 @@ code {
   height: 100%;
 }
 
-.App {
-  height: 100%;
+img,
+svg {
+  vertical-align: middle;
 }
