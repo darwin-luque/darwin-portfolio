@@ -1,7 +1,6 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
-import { useEffect } from 'react';
-import SearchIcon from '../../../assets/icons/search.icon';
-import XIcon from '../../../assets/icons/x.icon';
+import SearchIcon from '../../../../assets/icons/search.icon';
+import XIcon from '../../../../assets/icons/x.icon';
 import classes from './search-bar.module.css';
 
 const fadeInOutVariants: Variants = {
@@ -44,11 +43,17 @@ const inputVariants: Variants = {
 
 interface SearchBarProps {
   showBar: boolean;
+  inputValue: string;
   onInputChange: (value: string) => void;
   onToggleBar: (shouldShow: boolean) => void;
 }
 
-const SearchBar = ({ showBar, onToggleBar, onInputChange }: SearchBarProps) => {
+const SearchBar = ({
+  showBar,
+  inputValue,
+  onToggleBar,
+  onInputChange,
+}: SearchBarProps) => {
   return (
     <div className={classes['container']}>
       <motion.input
@@ -58,6 +63,7 @@ const SearchBar = ({ showBar, onToggleBar, onInputChange }: SearchBarProps) => {
         initial="initial"
         animate={showBar ? 'center' : 'exit'}
         onChange={(e) => onInputChange(e.target.value)}
+        value={inputValue}
         className={classes['input']}
         placeholder="Search"
         autoFocus
