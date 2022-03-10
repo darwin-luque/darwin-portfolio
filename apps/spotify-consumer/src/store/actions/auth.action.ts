@@ -97,3 +97,7 @@ export const signInFirebaseAction = Object.assign(
     }),
   }
 );
+
+export const signOutAction = (): AuthAction => ({
+  type: ActionTypes.SIGN_OUT,
+});

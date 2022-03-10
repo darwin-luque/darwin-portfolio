@@ -16,3 +16,8 @@
   align-items: center;
   --elements-separation: 1rem;
 }
+
+.sign-out {
+  background-color: transparent;
+  border: none;
+}

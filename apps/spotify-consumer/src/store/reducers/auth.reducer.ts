@@ -6,6 +6,7 @@ import { updateObject } from '../../../utils';
 import { ActionTypes } from '../constants/action-types';
 
 const initialState: AuthState = {
+  tokens: {},
   loading: false,
 };
 
@@ -48,6 +49,12 @@ const authReducer = (state = initialState, action: AuthAction) => {
         loading: false,
         error: state.error!,
       });
+
+    case ActionTypes.SIGN_OUT:
+      return updateObject(state, {
+        user: undefined,
+        tokens: undefined,
+      })
 
     default:
       return state;

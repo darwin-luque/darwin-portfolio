@@ -8,6 +8,9 @@ import { findTracksAction } from '../../store/actions/music.action';
 import { generateRandomString } from '../../../utils';
 import classes from './navbar.module.css';
 import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import ArrowIcon from '../../assets/icons/arrow.icon';
+import { signOutAction } from '../../store/actions/auth.action';
 
 const pagesElements = [
   {
@@ -53,11 +56,15 @@ const Navbar = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  console.log(user);
+  const signOutHandler = () => {
+    if (user) {
+      dispatch(signOutAction());
+    }
+  };
 
   return (
     <nav className={classes['navbar']}>
-      <ProfileSection user={user} onSignIn={signInHandler} />
+      <ProfileSection tokens={tokens} user={user} onSignIn={signInHandler} />
       <div className={classes['navbar-elements']}>
         {pagesElements.map((element) => (
           <NavbarElement
@@ -73,6 +80,16 @@ const Navbar = () => {
             onToggleBar={setShowSearchBar}
             onInputChange={setSearchValue}
           />
+        )}
+        {!!user && (
+          <motion.button
+            onClick={signOutHandler}
+            whileHover={{ scale: 1.02, cursor: 'pointer' }}
+            className={classes['sign-out']}
+            whileTap={{ scale: 0.98 }}
+          >
+            <ArrowIcon />
+          </motion.button>
         )}
       </div>
     </nav>

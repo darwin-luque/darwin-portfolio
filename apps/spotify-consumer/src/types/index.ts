@@ -158,7 +158,7 @@ interface BaseAction {
 }
 
 export interface AuthState {
-  tokens?: Tokens;
+  tokens: Tokens;
   user?: User;
   loading: boolean;
   error?: Error | string;

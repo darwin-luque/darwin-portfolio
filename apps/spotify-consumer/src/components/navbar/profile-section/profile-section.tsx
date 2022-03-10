@@ -1,23 +1,28 @@
 import { motion } from 'framer-motion';
-import { User } from '../../../types';
+import { Tokens, User } from '../../../types';
 import classes from './profile-section.module.css';
 
 interface ProfileSectionProps {
-  user: User | undefined;
+  user?: User;
+  tokens?: Tokens;
   onSignIn: () => void;
 }
 
-const ProfileSection = ({ user, onSignIn }: ProfileSectionProps) => (
+const ProfileSection = ({ user, tokens, onSignIn }: ProfileSectionProps) => (
   <div className={classes['profile-section']}>
-    {!!user ? (
-      <>
-        <img
-          className={classes['avatar']}
-          src={user.images[0].url}
-          alt="user avatar"
-        />
-        <p className={classes['name']}>{user.display_name}</p>
-      </>
+    {tokens?.spotify ? (
+      tokens?.firebase && !!user ? (
+        <>
+          <img
+            className={classes['avatar']}
+            src={user.images[0].url}
+            alt="user avatar"
+          />
+          <p className={classes['name']}>{user.display_name}</p>
+        </>
+      ) : (
+        <p className={classes['message']}>Confirm email we sent</p>
+      )
     ) : (
       <motion.button
         className={classes['message']}
