@@ -10,9 +10,9 @@ const XIcon = ({ size = 32, color = '#eee' }) => (
     <motion.path
       d="M17 7L7 17M7 7l5.03 5.03L17 17"
       fill="transparent"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
-      stroke-linecap="round"
+      strokeLinecap="round"
     />
   </motion.svg>
 );

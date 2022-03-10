@@ -10,10 +10,10 @@ const SearchIcon = ({ size = 32, color = '#eee' }) => (
     <motion.path
       d="M11.4 5.9a5.5 5.5 0 110 11 5.5 5.5 0 110-11zM18 18l-2.5-2.5"
       fill="transparent"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </motion.svg>
 );
