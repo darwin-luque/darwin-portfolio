@@ -22,7 +22,7 @@
   line-height: 2.5em;
 }
 
-.input[data-showBar="true"] {
+.input[data-showbar="true"] {
   border-radius: 0.5rem;
 }
 

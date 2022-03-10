@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Tokens, User } from '../../../types';
+import { Tokens, User } from '../../../../types';
 import classes from './profile-section.module.css';
 
 interface ProfileSectionProps {

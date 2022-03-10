@@ -59,7 +59,7 @@ const SearchBar = ({
       <motion.input
         layout
         variants={inputVariants}
-        data-showBar={showBar}
+        data-showbar={showBar}
         initial="initial"
         animate={showBar ? 'center' : 'exit'}
         onChange={(e) => onInputChange(e.target.value)}
