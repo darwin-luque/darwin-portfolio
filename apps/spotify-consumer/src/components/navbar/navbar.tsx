@@ -1,11 +1,13 @@
-import { generateRandomString } from '../../../utils';
-import queryString from 'query-string';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import ProfileSection from './profile-section/profile-section';
-import NavbarElement from './navbar-elements/navbar-elements';
-import SearchBar from './search-bar/search-bar';
 import { useEffect, useState } from 'react';
+import queryString from 'query-string';
+import ProfileSection from './profile-section/profile-section';
+import NavbarElement from './navbar-element/navbar-elements';
+import SearchBar from './search-bar/search-bar';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { findTracksAction } from '../../store/actions/music.action';
+import { generateRandomString } from '../../../utils';
+import classes from './navbar.module.css';
+import { useLocation } from 'react-router-dom';
 
 const pagesElements = [
   {
@@ -24,6 +26,7 @@ const Navbar = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const { user, tokens } = useAppSelector((state) => state.auth);
+  const location = useLocation();
   const dispatch = useAppDispatch();
 
   const signInHandler = () => {
@@ -47,14 +50,19 @@ const Navbar = () => {
         dispatch(findTracksAction(tokens, searchValue));
       }
     }, 300);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
-    <nav>
+    <nav className={classes['navbar']}>
       <ProfileSection user={user} onSignIn={signInHandler} />
-      <div>
+      <div className={classes['navbar-elements']}>
         {pagesElements.map((element) => (
-          <NavbarElement {...element} key={element.id} />
+          <NavbarElement
+            {...element}
+            selected={location.pathname === element.to}
+            key={element.id}
+          />
         ))}
         <SearchBar
           showBar={showSearchBar}

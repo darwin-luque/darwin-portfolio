@@ -1,0 +1,7 @@
+.single-search-icon {
+  margin: 0 var(--elements-separation);
+  background-color: transparent;
+  padding: 0;
+  width: fit-content;
+  border: none;
+}

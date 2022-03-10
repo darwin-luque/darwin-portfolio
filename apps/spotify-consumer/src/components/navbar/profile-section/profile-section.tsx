@@ -11,8 +11,8 @@ const ProfileSection = ({ user, onSignIn }: ProfileSectionProps) => (
   <div className={classes['profile-section']}>
     {!!user ? (
       <>
-        <img src={user.images[0].url} alt="user avatar" />
-        <p>{user.display_name}</p>
+        <img className={classes['avatar']} src={user.images[0].url} alt="user avatar" />
+        <p className={classes['name']}>{user.display_name}</p>
       </>
     ) : (
       <motion.button className={classes['message']} onClick={onSignIn}>

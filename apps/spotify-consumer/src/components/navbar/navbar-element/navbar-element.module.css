@@ -1,0 +1,25 @@
+.element {
+  --element-color: var(--color-4);
+  text-decoration: none;
+  color: var(--element-color);
+  margin: 0 var(--elements-separation);
+  border-bottom: 1px solid transparent;
+  padding: 0.2rem 0;
+}
+
+.name {
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.005px;
+  font-size: 1.1rem;
+  line-height: 1.5em;
+}
+
+.element:hover {
+  border-bottom-color: var(--element-color);
+}
+
+.selected {
+  --element-color: var(--color-3);
+  border-bottom-color: var(--element-color);
+}

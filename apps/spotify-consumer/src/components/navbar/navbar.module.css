@@ -1,0 +1,18 @@
+.navbar {
+  --navbar-height: 15vh;
+  padding: 1rem 2rem;
+  background-color: var(--color-1);
+  color: var(--color-4);
+  max-height: 200px;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-elements {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  --elements-separation: 1rem;
+}

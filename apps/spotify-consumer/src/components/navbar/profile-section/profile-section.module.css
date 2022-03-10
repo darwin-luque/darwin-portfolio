@@ -1,0 +1,15 @@
+.profile-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 20%;
+}
+
+.avatar {
+  --avatar-size: calc(var(--navbar-height) - 2vh);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  object-fit: cover;
+  border-radius: 50%;
+}
