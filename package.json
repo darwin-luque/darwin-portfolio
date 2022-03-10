@@ -17,6 +17,7 @@
     "moment": "^2.29.1",
     "motion": "^10.6.2",
     "motion-signals": "^0.0.3",
+    "query-string": "^7.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.6",
