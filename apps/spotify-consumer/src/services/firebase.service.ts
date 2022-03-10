@@ -24,13 +24,11 @@ export class FirebaseService {
     if (!isSignInWithEmailLink(this.auth, window.location.href)) {
       throw new Error('Invalid authentication method');
     }
-    const result = await signInWithEmailLink(
+    return signInWithEmailLink(
       this.auth,
       email,
       window.location.href
     );
-
-    return result;
   }
 
   signOut(): Promise<void> {

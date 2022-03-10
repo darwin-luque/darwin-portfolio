@@ -77,22 +77,26 @@ export const signInFirebaseAction = Object.assign(
   (user: User) => async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
     dispatch(signInFirebaseAction.start());
     try {
+      console.log('confirm sign in action');
       const firebaseToken = await firebaseService.confirmSignInEmailLink(
         user.email
       );
-      dispatch(signInFirebaseAction.success(firebaseToken));
+      console.log(firebaseToken);
+      dispatch(signInFirebaseAction.success(user, firebaseToken));
     } catch (error) {
+      console.log(error);
       dispatch(signInFirebaseAction.fail(error as Error));
     }
   },
   {
-    start: (): AuthAction => ({ type: ActionTypes.SIGN_IN_SPOTIFY_START }),
-    success: (firebaseToken: UserCredential): AuthAction => ({
-      type: ActionTypes.SIGN_IN_SPOTIFY_SUCCESS,
+    start: (): AuthAction => ({ type: ActionTypes.SIGN_IN_FIREBASE_START }),
+    success: (user: User, firebaseToken: UserCredential): AuthAction => ({
+      type: ActionTypes.SIGN_IN_FIREBASE_SUCCESS,
       firebaseToken,
+      user,
     }),
     fail: (error: Error): AuthAction => ({
-      type: ActionTypes.SIGN_IN_SPOTIFY_FAIL,
+      type: ActionTypes.SIGN_IN_FIREBASE_FAIL,
       error,
     }),
   }
