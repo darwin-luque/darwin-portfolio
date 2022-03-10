@@ -7,7 +7,7 @@
 }
 
 .avatar {
-  --avatar-size: calc(var(--navbar-height) - 2vh);
+  --avatar-size: 90px;
   width: var(--avatar-size);
   height: var(--avatar-size);
   object-fit: cover;

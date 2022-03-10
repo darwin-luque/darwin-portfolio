@@ -1,7 +1,31 @@
-.single-search-icon {
+.container {
   margin: 0 var(--elements-separation);
+}
+
+.button {
   background-color: transparent;
   padding: 0;
   width: fit-content;
   border: none;
+}
+
+.input {
+  border: none;
+  background: transparent;
+  color: inherit;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 2.5em;
+}
+
+.input[data-showBar="true"] {
+  border-radius: 0.5rem;
+}
+
+.input:focus {
+  outline: none;
 }
