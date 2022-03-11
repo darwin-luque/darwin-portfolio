@@ -1,0 +1,51 @@
+.top,
+.bottom,
+.right,
+.left {
+  position: absolute;
+  z-index: 100;
+}
+
+.top,
+.bottom,
+.top div,
+.bottom div {
+  height: 20vh;
+  width: 100vw;
+}
+
+.top,
+.bottom {
+  right: 0;
+  left: 0;
+}
+
+.top {
+  top: 0;
+}
+
+.bottom {
+  bottom: 0;
+}
+
+.right,
+.left,
+.right div,
+.left div {
+  height: 100vh;
+  width: 20vw;
+}
+
+.right,
+.left {
+  top: 0;
+  bottom: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.left {
+  left: 0;
+}
