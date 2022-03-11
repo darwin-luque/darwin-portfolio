@@ -4,6 +4,8 @@
   justify-content: space-between;
   height: 100%;
   width: 20%;
+  min-width: 200px;
+  max-width: 250px;
 }
 
 .avatar {

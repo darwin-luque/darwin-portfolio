@@ -1,6 +1,6 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
-import SearchIcon from '../../../../assets/icons/search.icon';
-import XIcon from '../../../../assets/icons/x.icon';
+import SearchIcon from '../../../assets/icons/search.icon';
+import XIcon from '../../../assets/icons/x.icon';
 import classes from './search-bar.module.css';
 
 const fadeInOutVariants: Variants = {
@@ -45,7 +45,7 @@ interface SearchBarProps {
   showBar: boolean;
   inputValue: string;
   onInputChange: (value: string) => void;
-  onToggleBar: (shouldShow: boolean) => void;
+  onToggleBar: () => void;
 }
 
 const SearchBar = ({
@@ -74,7 +74,7 @@ const SearchBar = ({
         animate="center"
         exit="end"
         whileHover={{ cursor: 'pointer' }}
-        onClick={() => onToggleBar(!showBar)}
+        onClick={onToggleBar}
         className={classes['button']}
       >
         {showBar ? <XIcon /> : <SearchIcon />}

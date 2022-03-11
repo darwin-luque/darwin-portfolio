@@ -1,0 +1,11 @@
+.mobile-navbar {
+  --navbar-height: 6.5vh;
+  padding: 1rem 2rem;
+  background-color: var(--color-1);
+  color: var(--color-4);
+  max-height: 90px;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}

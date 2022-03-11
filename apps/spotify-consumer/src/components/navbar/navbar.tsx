@@ -1,11 +1,15 @@
+import { useWindowSize } from '@darwin-portfolio/react/hooks';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useCycle } from 'framer-motion';
 import queryString from 'query-string';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { findTracksAction } from '../../store/actions/music.action';
 import { generateRandomString } from '../../../utils';
-import { useLocation } from 'react-router-dom';
 import { signOutAction } from '../../store/actions/auth.action';
 import DesktopNavbar from './desktop-navbar/desktop-navbar';
+import MobileNavbar from './mobile-navbar/mobile-navbar';
+import classes from './navbar.module.css';
 
 const Navbar = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -13,6 +17,8 @@ const Navbar = () => {
   const { user, tokens } = useAppSelector((state) => state.auth);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const { width } = useWindowSize();
+  const isMobile = 768 >= (width ?? 0);
 
   const signInHandler = () => {
     const a = document.createElement('a');
@@ -44,17 +50,20 @@ const Navbar = () => {
     }
   };
 
+  const ResponsiveNavbar = isMobile ? MobileNavbar : DesktopNavbar;
+
   return (
-    <DesktopNavbar
-      onSignIn={signInHandler}
-      onSignOut={signOutHandler}
-      searchValue={searchValue}
-      setSearchValue={setSearchValue}
-      showSearchBar={showSearchBar}
-      setShowSearchBar={setShowSearchBar}
-      tokens={tokens}
-      user={user}
-    />
+    <span className={classes['navbar']}>
+      <ResponsiveNavbar
+        setSearchValue={setSearchValue}
+        pathname={location.pathname}
+        onSignOut={signOutHandler}
+        searchValue={searchValue}
+        onSignIn={signInHandler}
+        tokens={tokens}
+        user={user}
+      />
+    </span>
   );
 };
 
