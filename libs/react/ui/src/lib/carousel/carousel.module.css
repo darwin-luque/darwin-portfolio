@@ -46,6 +46,8 @@
 }
 
 .item {
-  width: 23%;
   margin: 0 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
