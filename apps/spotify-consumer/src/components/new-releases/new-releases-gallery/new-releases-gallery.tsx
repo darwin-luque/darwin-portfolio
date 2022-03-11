@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useWindowSize } from '@darwin-portfolio/react/hooks';
 import axios, { AxiosResponse } from 'axios';
 import { Carousel } from '@darwin-portfolio/react/ui';
 import TrackCard from '../../track-card/track-card';
@@ -12,6 +13,7 @@ const NewReleasesGallery = () => {
   const [countryCode, setCountryCode] = useState<Country>();
   const [gettingLocation, setGettingLocation] = useState<boolean>(true);
   const dispatch = useAppDispatch();
+  const { width } = useWindowSize();
 
   useEffect(() => {
     if (tokens && newReleases.length === 0 && !gettingLocation) {
@@ -51,8 +53,11 @@ const NewReleasesGallery = () => {
     }
   }, []);
 
+  const trackCardMinWidth = 300;
+  const perPage = Math.floor((width ?? 0) / trackCardMinWidth);
+
   return (
-    <Carousel data={newReleases} perPage={4} ElementTemplate={TrackCard} />
+    <Carousel data={newReleases} perPage={perPage} ElementTemplate={TrackCard} />
   );
 };
 
