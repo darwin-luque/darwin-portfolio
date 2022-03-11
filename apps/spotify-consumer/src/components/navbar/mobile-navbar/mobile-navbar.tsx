@@ -15,6 +15,10 @@ interface MobileNavbarInterface {
 }
 
 const MobileNavbar = ({
+  user,
+  tokens,
+  onSignIn,
+  onSignOut,
   searchValue,
   setSearchValue,
 }: MobileNavbarInterface) => {
@@ -22,7 +26,12 @@ const MobileNavbar = ({
 
   return (
     <div className={classes['mobile-navbar']}>
-      <Sidebar />
+      <Sidebar
+        onSignIn={onSignIn}
+        onSignOut={onSignOut}
+        user={user}
+        tokens={tokens}
+      />
       <SearchBar
         showBar={showSearchBar}
         onToggleBar={setShowSearchBar}

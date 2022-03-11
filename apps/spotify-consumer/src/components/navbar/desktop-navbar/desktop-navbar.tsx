@@ -1,7 +1,6 @@
 import { motion, useCycle } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
 import ArrowIcon from '../../../assets/icons/arrow.icon';
-import ProfileSection from './profile-section/profile-section';
+import ProfileSection from '../profile-section/profile-section';
 import NavbarElement from './navbar-element/navbar-element';
 import SearchBar from '../search-bar/search-bar';
 import classes from './desktop-navbar.module.css';

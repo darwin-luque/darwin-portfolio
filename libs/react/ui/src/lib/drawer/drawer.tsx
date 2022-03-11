@@ -66,6 +66,7 @@ export const Drawer = ({
       className={classes[side]}
     >
       <motion.div
+        className={classes['background']}
         variants={sidebar}
         style={{ ...sizeStyles, backgroundColor }}
       />
