@@ -23,6 +23,26 @@ const sidebar: Variants = {
   },
 };
 
+const sidebarContainer: Variants = {
+  open: {
+    zIndex: 100,
+    transition: {
+      type: 'spring',
+      stiffness: 20,
+      restDelta: 2,
+    },
+  },
+  closed: {
+    zIndex: 1,
+    transition: {
+      delay: 0.5,
+      type: 'spring',
+      stiffness: 400,
+      damping: 40,
+    },
+  },
+};
+
 // Just for typing purpose
 const typingStyle: MotionStyle = {};
 
@@ -59,15 +79,17 @@ export const Drawer = ({
   return (
     <motion.nav
       initial={false}
+      variants={sidebarContainer}
       animate={show ? 'open' : 'closed'}
       custom={height}
       ref={containerRef}
       style={sizeStyles}
-      className={classes[side]}
+      className={`${classes[side]} ${show && classes['show']}`}
     >
       <motion.div
         className={classes['background']}
         variants={sidebar}
+        animate={show ? 'open' : 'closed'}
         style={{ ...sizeStyles, backgroundColor }}
       />
       {children}
