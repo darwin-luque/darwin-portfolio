@@ -1,8 +1,22 @@
 .element {
   list-style: none;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   display: flex;
   align-items: center;
-  cursor: pointer;
   width: 100%;
+}
+
+.element:last-child {
+  margin-bottom: 0;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.3rem;
+  line-height: 1.2em;
+}
+
+.button:hover {
+  cursor: pointer;
 }

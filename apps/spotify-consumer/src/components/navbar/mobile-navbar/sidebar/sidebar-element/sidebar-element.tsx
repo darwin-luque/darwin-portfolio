@@ -20,30 +20,43 @@ const variants: Variants = {
 };
 
 interface SidebarElementProps {
+  shouldAddEffectOnMouseActivity?: boolean;
   onElementClick?: () => void;
+  onToggleSidebar?: () => void;
   children?: ReactNode;
   name?: string;
 }
 
 const SidebarElement = ({
+  onToggleSidebar,
+  onElementClick,
   children,
   name,
-  onElementClick,
-}: SidebarElementProps) => (
-  <motion.li
-    className={classes['element']}
-    variants={variants}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    {children ? (
-      children
-    ) : (
-      <button className={classes['button']} onClick={onElementClick}>
-        {name}
-      </button>
-    )}
-  </motion.li>
-);
+  shouldAddEffectOnMouseActivity = false,
+}: SidebarElementProps) => {
+  const clickHandler = () => {
+    onToggleSidebar && onToggleSidebar();
+    onElementClick && onElementClick();
+  };
+
+  return (
+    <motion.li
+      whileHover={
+        shouldAddEffectOnMouseActivity ? { scale: 1.05, cursor: 'pointer' } : {}
+      }
+      whileTap={shouldAddEffectOnMouseActivity ? { scale: 0.95 } : {}}
+      variants={variants}
+      className={classes['element']}
+    >
+      {children ? (
+        children
+      ) : (
+        <button className={classes['button']} onClick={clickHandler}>
+          {name}
+        </button>
+      )}
+    </motion.li>
+  );
+};
 
 export default SidebarElement;

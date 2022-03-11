@@ -37,10 +37,17 @@ const Sidebar = ({ user, tokens, onSignIn, onSignOut }: SidebarProps) => {
           <SidebarElement
             key={id}
             name={name}
+            shouldAddEffectOnMouseActivity
+            onToggleSidebar={toggleShowSidebar}
             onElementClick={() => history.push(to)}
           />
         ))}
-        <SidebarElement name="Sign Out" onElementClick={onSignOut} />
+        <SidebarElement
+          name="Sign Out"
+          onElementClick={onSignOut}
+          shouldAddEffectOnMouseActivity
+          onToggleSidebar={toggleShowSidebar}
+        />
       </ul>
       <MenuToggle onToggle={toggleShowSidebar} />
     </Drawer>
