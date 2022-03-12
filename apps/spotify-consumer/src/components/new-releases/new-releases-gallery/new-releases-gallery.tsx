@@ -57,7 +57,12 @@ const NewReleasesGallery = () => {
   const perPage = Math.floor((width ?? 0) / trackCardMinWidth);
 
   return (
-    <Carousel data={newReleases} perPage={perPage} ElementTemplate={TrackCard} />
+    <Carousel
+      data={newReleases}
+      perPage={perPage}
+      ElementTemplate={TrackCard}
+      itemMinWidth={trackCardMinWidth}
+    />
   );
 };
 
