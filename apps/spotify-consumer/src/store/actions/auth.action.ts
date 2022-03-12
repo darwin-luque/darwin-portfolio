@@ -5,6 +5,7 @@ import {
   AuthAction,
   Notification,
   SpotifyAuthResponse,
+  SpotifyCredentials,
   Tokens,
   User,
 } from '../../types';
@@ -23,12 +24,13 @@ export const signInSpotifyAction = Object.assign(
     async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
       dispatch(signInSpotifyAction.start());
       try {
-        const user = await spotifyService.signIn(authResponse);
+        const token = await spotifyService.signIn(authResponse);
+        const user = await spotifyService.userProfile(token);
         if (shouldSendEmail) {
           await firebaseService.sendSignInEmailLink(user.email);
         }
 
-        dispatch(signInSpotifyAction.success(user, authResponse));
+        dispatch(signInSpotifyAction.success(user, token));
 
         const notificationConfig: Notification = {
           id: generateRandomString(),
@@ -60,7 +62,7 @@ export const signInSpotifyAction = Object.assign(
     },
   {
     start: (): AuthAction => ({ type: ActionTypes.SIGN_IN_SPOTIFY_START }),
-    success: (user: User, spotifyToken: SpotifyAuthResponse): AuthAction => ({
+    success: (user: User, spotifyToken: SpotifyCredentials): AuthAction => ({
       type: ActionTypes.SIGN_IN_SPOTIFY_SUCCESS,
       user,
       spotifyToken,
@@ -76,7 +78,6 @@ export const signInFirebaseAction = Object.assign(
   (user: User) => async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
     dispatch(signInFirebaseAction.start());
     try {
-      console.log('confirm sign in action');
       const firebaseToken = await firebaseService.confirmSignInEmailLink(
         user.email
       );
@@ -106,6 +107,8 @@ export const refreshTokenAction = Object.assign(
     async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
       dispatch(refreshTokenAction.start());
       try {
+        const spotifyToken = await spotifyService.refreshToken(tokens.spotify!);
+        
         dispatch(refreshTokenAction.success());
       } catch (error) {
         dispatch(refreshTokenAction.fail(error as Error));
@@ -122,7 +125,7 @@ export const refreshTokenAction = Object.assign(
     fail: (error: Error): AuthAction => ({
       type: ActionTypes.REFRESH_TOKEN_FAIL,
       error,
-    })
+    }),
   }
 );
 

@@ -26,7 +26,7 @@ const Navbar = () => {
     const a = document.createElement('a');
     const state = generateRandomString(16);
     a.href = `${process.env['NX_AUTH_ENDPOINT']}?${queryString.stringify({
-      response_type: 'token',
+      response_type: 'code',
       client_id: process.env['NX_CLIENT_ID'],
       scope: 'user-read-private user-read-email',
       redirect_uri: process.env['NX_REDIRECT_URI'],

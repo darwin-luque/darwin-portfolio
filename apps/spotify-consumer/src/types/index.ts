@@ -17,6 +17,12 @@ export interface Notification {
 }
 
 export interface SpotifyAuthResponse {
+  code?: string;
+  state: string;
+  error?: string;
+}
+
+export interface SpotifyCredentials {
   access_token: string;
   expires_in: string;
   state: string;
@@ -59,7 +65,7 @@ export interface User {
 }
 
 export interface Tokens {
-  spotify?: SpotifyAuthResponse;
+  spotify?: SpotifyCredentials;
   firebase?: UserCredential;
 }
 
@@ -169,7 +175,7 @@ export interface AuthState {
 export interface AuthAction extends BaseAction {
   user?: User;
   tokens?: Tokens;
-  spotifyToken?: SpotifyAuthResponse;
+  spotifyToken?: SpotifyCredentials;
   firebaseToken?: UserCredential;
 }
 

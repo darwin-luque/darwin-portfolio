@@ -5,6 +5,7 @@ import {
   NewReleaseResponse,
   QueryTracksResponse,
   SpotifyAuthResponse,
+  SpotifyCredentials,
   Tokens,
   Track,
   TracksOfAlbum,
@@ -14,17 +15,33 @@ import {
 export class SpotifyService {
   constructor(private readonly apiUrl: string) {}
 
-  async signIn(authData: SpotifyAuthResponse): Promise<User> {
+  async signIn(authData: SpotifyAuthResponse): Promise<SpotifyCredentials> {
+    const token: AxiosResponse<SpotifyCredentials> = await axios.post(
+      `${this.apiUrl}/token`,
+      {
+        grant_type: 'authroization_code',
+        code: authData.code!,
+        redirectUri: process.env['NX_REDIRECT_URI'],
+      },
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }
+    );
+
+    return token.data;
+  }
+
+  async userProfile(creds: SpotifyCredentials): Promise<User> {
     const user: AxiosResponse<User> = await axios.get(`${this.apiUrl}/me`, {
       headers: {
-        Authorization: `${authData.token_type} ${authData.access_token}`,
+        Authorization: `${creds.token_type} ${creds.access_token}`,
       },
     });
 
     return user.data;
   }
 
-  async refreshToken(token: SpotifyAuthResponse): Promise<SpotifyAuthResponse> {
+  async refreshToken(token: SpotifyCredentials): Promise<SpotifyCredentials> {
     const newToken: AxiosResponse<{
       access_token: string;
       expires_in: string;
