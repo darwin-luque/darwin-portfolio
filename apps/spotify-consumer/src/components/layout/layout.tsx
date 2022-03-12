@@ -17,8 +17,6 @@ const Layout = ({ children }: LayoutProps) => {
   useEffect(() => {
     const spotifyQuery = queryString.parse(location.hash || location.search);
 
-    console.log(tokens);
-
     if (!tokens?.spotify && spotifyQuery['access_token']) {
       dispatch(
         signInSpotifyAction(

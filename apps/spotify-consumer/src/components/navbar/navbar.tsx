@@ -20,6 +20,8 @@ const Navbar = () => {
   const { width } = useWindowSize();
   const isMobile = 768 >= (width ?? 0);
 
+  // TODO: Use response_type: 'code' instead of 'token' and then request token
+  // Because wiht current flow there is no refresh token
   const signInHandler = () => {
     const a = document.createElement('a');
     const state = generateRandomString(16);

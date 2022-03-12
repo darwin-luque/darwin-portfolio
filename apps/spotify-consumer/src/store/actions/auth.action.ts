@@ -5,6 +5,7 @@ import {
   AuthAction,
   Notification,
   SpotifyAuthResponse,
+  Tokens,
   User,
 } from '../../types';
 import { ActionTypes } from '../constants/action-types';
@@ -14,9 +15,7 @@ import { generateRandomString } from '../../utils';
 import { SpotifyService } from '../../services/spotify.service';
 import { FirebaseService } from '../../services/firebase.service';
 
-const spotifyService = new SpotifyService(
-  process.env['NX_API_ENDPOINT'] ?? ''
-);
+const spotifyService = new SpotifyService(process.env['NX_API_ENDPOINT'] ?? '');
 const firebaseService = new FirebaseService(db, auth);
 
 export const signInSpotifyAction = Object.assign(
@@ -99,6 +98,31 @@ export const signInFirebaseAction = Object.assign(
       type: ActionTypes.SIGN_IN_FIREBASE_FAIL,
       error,
     }),
+  }
+);
+
+export const refreshTokenAction = Object.assign(
+  (tokens: Tokens) =>
+    async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
+      dispatch(refreshTokenAction.start());
+      try {
+        dispatch(refreshTokenAction.success());
+      } catch (error) {
+        dispatch(refreshTokenAction.fail(error as Error));
+      }
+    },
+  {
+    start: (): AuthAction => ({
+      type: ActionTypes.REFRESH_TOKEN_START,
+    }),
+    success: (tokens: Tokens): AuthAction => ({
+      type: ActionTypes.REFRESH_TOKEN_SUCCESS,
+      tokens,
+    }),
+    fail: (error: Error): AuthAction => ({
+      type: ActionTypes.REFRESH_TOKEN_FAIL,
+      error,
+    })
   }
 );
 

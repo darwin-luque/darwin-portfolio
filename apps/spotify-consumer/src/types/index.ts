@@ -21,6 +21,8 @@ export interface SpotifyAuthResponse {
   expires_in: string;
   state: string;
   token_type: string;
+  scope: string;
+  refresh_token: string;
 }
 
 export interface SpotifyImage {
@@ -166,6 +168,7 @@ export interface AuthState {
 
 export interface AuthAction extends BaseAction {
   user?: User;
+  tokens?: Tokens;
   spotifyToken?: SpotifyAuthResponse;
   firebaseToken?: UserCredential;
 }

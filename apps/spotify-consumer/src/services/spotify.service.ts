@@ -24,6 +24,19 @@ export class SpotifyService {
     return user.data;
   }
 
+  async refreshToken(token: SpotifyAuthResponse): Promise<SpotifyAuthResponse> {
+    const newToken: AxiosResponse<{
+      access_token: string;
+      expires_in: string;
+    }> = await axios.post(
+      `${this.apiUrl}/refresh`,
+      { refresh_token: token.refresh_token },
+      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+    );
+
+    return { ...token, ...newToken.data };
+  }
+
   async getNewReleaseAlbums(
     tokens: Tokens,
     countryCode?: Country
