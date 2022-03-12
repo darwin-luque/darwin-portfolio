@@ -42,7 +42,7 @@ const Navbar = () => {
       }
     }, 300);
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [searchValue]);
 
   const signOutHandler = () => {
     if (user) {
