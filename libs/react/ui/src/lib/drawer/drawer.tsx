@@ -26,6 +26,7 @@ const sidebar: Variants = {
 const sidebarContainer: Variants = {
   open: {
     zIndex: 100,
+    position: 'fixed',
     transition: {
       type: 'spring',
       stiffness: 20,
@@ -34,6 +35,7 @@ const sidebarContainer: Variants = {
   },
   closed: {
     zIndex: 1,
+    position: 'absolute',
     transition: {
       delay: 0.5,
       type: 'spring',

@@ -1,12 +1,5 @@
 .top,
 .bottom,
-.right,
-.left {
-  position: absolute;
-}
-
-.top,
-.bottom,
 .background {
   height: 20vh;
   width: 100vw;
