@@ -2,7 +2,7 @@
 // value for state and its the first param redux is expecting
 /* eslint-disable @typescript-eslint/default-param-last */
 import { LibraryAction, LibraryState } from '../../types';
-import { updateObject } from '../../../utils';
+import { updateObject } from '../../utils';
 import { ActionTypes } from '../constants/action-types';
 
 const initialState: LibraryState = {

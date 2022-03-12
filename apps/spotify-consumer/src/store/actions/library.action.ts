@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '..';
 import { LibraryAction, Track } from '../../types';
-import { generateRandomString } from '../../../utils';
+import { generateRandomString } from '../../utils';
 import { ActionTypes } from '../constants/action-types';
 import { addNotificationAction } from './notifications.action';
 

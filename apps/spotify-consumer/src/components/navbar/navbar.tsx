@@ -5,7 +5,7 @@ import { useCycle } from 'framer-motion';
 import queryString from 'query-string';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { findTracksAction } from '../../store/actions/music.action';
-import { generateRandomString } from '../../../utils';
+import { generateRandomString } from '../../utils';
 import { signOutAction } from '../../store/actions/auth.action';
 import DesktopNavbar from './desktop-navbar/desktop-navbar';
 import MobileNavbar from './mobile-navbar/mobile-navbar';

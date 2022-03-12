@@ -10,7 +10,7 @@ import {
 import { ActionTypes } from '../constants/action-types';
 import { auth, db } from '../../configurations/firebase';
 import { addNotificationAction } from './notifications.action';
-import { generateRandomString } from '../../../utils';
+import { generateRandomString } from '../../utils';
 import { SpotifyService } from '../../services/spotify.service';
 import { FirebaseService } from '../../services/firebase.service';
 
