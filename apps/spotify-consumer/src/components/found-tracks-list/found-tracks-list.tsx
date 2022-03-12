@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { toggleTrackAction } from '../../store/actions/library.action';
+import { updateLibraryAction } from '../../store/actions/library.action';
 import { Track } from '../../types';
 import FoundTracksElement from './found-tracks-elements/found-tracks-elements';
 import classes from './found-tracks-list.module.css';
@@ -8,6 +8,7 @@ import classes from './found-tracks-list.module.css';
 const FoundTracksList = () => {
   const { foundTracks } = useAppSelector((state) => state.music);
   const { tracks } = useAppSelector((state) => state.library);
+  const { tokens } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const toggleTrackHandler = (
@@ -16,7 +17,7 @@ const FoundTracksList = () => {
     inLibrary: boolean
   ) => {
     if ((state === 'add' && !inLibrary) || (state === 'remove' && inLibrary)) {
-      dispatch(toggleTrackAction(track, state));
+      dispatch(updateLibraryAction(track, tracks, state === 'add', tokens));
     }
   };
 

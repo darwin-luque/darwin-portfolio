@@ -10,7 +10,7 @@ import {
   User,
 } from '../../types';
 import { ActionTypes } from '../constants/action-types';
-import { auth, db } from '../../configurations/firebase';
+import { auth, database } from '../../configurations/firebase';
 import { addNotificationAction } from './notifications.action';
 import { generateRandomString } from '../../utils';
 import { SpotifyService } from '../../services/spotify.service';
@@ -20,7 +20,7 @@ const spotifyService = new SpotifyService(
   process.env['NX_API_ENDPOINT'] ?? '',
   process.env['NX_AUTH_ENDPOINT'] ?? ''
 );
-const firebaseService = new FirebaseService(db, auth);
+const firebaseService = new FirebaseService(database, auth);
 
 export const signInSpotifyAction = Object.assign(
   (authResponse: SpotifyAuthResponse, shouldSendEmail: boolean = true) =>

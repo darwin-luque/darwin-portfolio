@@ -1,66 +1,39 @@
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '..';
-import { LibraryAction, Track } from '../../types';
-import { generateRandomString } from '../../utils';
+import { auth, database } from '../../configurations/firebase';
+import { FirebaseService } from '../../services/firebase.service';
+import { LibraryAction, Tokens, Track } from '../../types';
+import { addOrRemoveTrackOnLibrary } from '../../utils';
 import { ActionTypes } from '../constants/action-types';
-import { addNotificationAction } from './notifications.action';
 
-export const addTrackAction = Object.assign(
-  (track: Track) =>
+const firebaseService = new FirebaseService(database, auth);
+
+export const updateLibraryAction = Object.assign(
+  (track: Track, library: Track[], isAdd: boolean, tokens: Tokens) =>
     async (dispatch: ThunkDispatch<RootState, {}, LibraryAction>) => {
-      dispatch(addTrackAction.start());
+      dispatch(updateLibraryAction.start());
       try {
-        dispatch(addTrackAction.success(track));
+        const updatedLibrary = addOrRemoveTrackOnLibrary(track, library, isAdd);
+        const tracks = await firebaseService.uploadLibrary(
+          tokens.firebase!,
+          updatedLibrary
+        );
+        dispatch(updateLibraryAction.success(tracks));
       } catch (error) {
-        dispatch(addTrackAction.fail(error as Error));
-        dispatch(addNotificationAction({
-          id: generateRandomString(),
-          content: (error as Error).message ?? 'Could not add the track',
-          title: 'Something went wrong!',
-          type: 'warning',
-        }));
+        dispatch(updateLibraryAction.fail(error as Error));
       }
     },
   {
-    start: (): LibraryAction => ({ type: ActionTypes.ADD_TRACK_START }),
-    success: (track: Track) => ({ type: ActionTypes.ADD_TRACK_SUCCESS, track }),
-    fail: (error: Error) => ({ type: ActionTypes.ADD_TRACK_FAIL, error }),
-  }
-);
-
-export const removeTrackAction = Object.assign(
-  (track: Track) =>
-    async (dispatch: ThunkDispatch<RootState, {}, LibraryAction>) => {
-      dispatch(removeTrackAction.start());
-      try {
-        dispatch(removeTrackAction.success(track.id));
-      } catch (error) {
-        dispatch(removeTrackAction.fail(error as Error));
-        dispatch(addNotificationAction({
-          id: generateRandomString(),
-          content: (error as Error).message ?? 'Could not remove the track',
-          title: 'Something went wrong!',
-          type: 'warning',
-        }));
-      }
-    },
-  {
-    start: (): LibraryAction => ({ type: ActionTypes.REMOVE_TRACK_START }),
-    success: (trackId: string) => ({
-      type: ActionTypes.REMOVE_TRACK_SUCCESS,
-      trackId,
+    start: (): LibraryAction => ({
+      type: ActionTypes.UPDATE_LIBRARY_START,
     }),
-    fail: (error: Error) => ({ type: ActionTypes.REMOVE_TRACK_FAIL, error }),
+    success: (tracks: Track[]): LibraryAction => ({
+      type: ActionTypes.UPDATE_LIBRARY_START,
+      tracks,
+    }),
+    fail: (error: Error): LibraryAction => ({
+      type: ActionTypes.UPDATE_LIBRARY_FAIL,
+      error,
+    }),
   }
 );
-
-export const toggleTrackAction =
-  (track: Track, action: 'add' | 'remove') =>
-    (dispatch: ThunkDispatch<RootState, {}, LibraryAction>) => {
-      const actionsMapper = {
-        add: addTrackAction,
-        remove: removeTrackAction,
-      };
-    
-      dispatch(actionsMapper[action](track));
-    };

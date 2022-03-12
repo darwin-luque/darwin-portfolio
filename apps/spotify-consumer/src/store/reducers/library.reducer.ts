@@ -14,48 +14,25 @@ const initialState: LibraryState = {
 };
 
 const libraryReducer = (state = initialState, action: LibraryAction) => {
-  const inLibrary = state.tracks
-    .map(({ id }) => id)
-    .includes(action.track?.id ?? '');
   switch (action.type) {
-    case ActionTypes.ADD_TRACK_START:
+    case ActionTypes.UPDATE_LIBRARY_START:
       return updateObject(state, {
         loading: updateObject(state.loading, {
           add: true,
         }),
       });
-    case ActionTypes.ADD_TRACK_SUCCESS:
+    case ActionTypes.UPDATE_LIBRARY_SUCCESS:
       return updateObject(state, {
-        tracks: inLibrary ? state.tracks : [...state.tracks, action.track!],
+        tracks: action.tracks!,
         loading: updateObject(state.loading, {
           add: false,
         }),
       });
-    case ActionTypes.ADD_TRACK_FAIL:
+    case ActionTypes.UPDATE_LIBRARY_FAIL:
       return updateObject(state, {
         error: action.error!,
         loading: updateObject(state.loading, {
           add: false,
-        }),
-      });
-    case ActionTypes.REMOVE_TRACK_START:
-      return updateObject(state, {
-        loading: updateObject(state.loading, {
-          remove: true,
-        }),
-      });
-    case ActionTypes.REMOVE_TRACK_SUCCESS:
-      return updateObject(state, {
-        tracks: state.tracks.filter(({ id }) => id !== action.trackId),
-        loading: updateObject(state.loading, {
-          remove: false,
-        }),
-      });
-    case ActionTypes.REMOVE_TRACK_FAIL:
-      return updateObject(state, {
-        error: action.error!,
-        loading: updateObject(state.loading, {
-          remove: false,
         }),
       });
     default:

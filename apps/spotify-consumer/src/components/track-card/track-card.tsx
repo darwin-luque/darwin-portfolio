@@ -1,6 +1,6 @@
-import { Card } from '@darwin-portfolio/react/ui'
+import { Card } from '@darwin-portfolio/react/ui';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { toggleTrackAction } from '../../store/actions/library.action';
+import { updateLibraryAction } from '../../store/actions/library.action';
 import { Track } from '../../types';
 import TrackImage from './track-image/track-image';
 import TrackTitle from './track-title/track-title';
@@ -11,15 +11,11 @@ export interface TrackCardProps extends Track {
 }
 
 const TrackCard = (props: TrackCardProps) => {
-  const tracks = useAppSelector((state) => state.library.tracks);
-  const {
-    id,
-    name,
-    album,
-    artists,
-    external_urls: externalUrls,
-    useScrollEffect,
-  } = props;
+  const { tracks } = useAppSelector((state) => state.library);
+  const { tokens } = useAppSelector((state) => state.auth);
+  const { useScrollEffect, ...track } = props;
+
+  const { id, name, album, artists, external_urls: externalUrls } = track;
   const dispatch = useAppDispatch();
 
   const applyScrollEffect =
@@ -28,7 +24,7 @@ const TrackCard = (props: TrackCardProps) => {
 
   const toggleTrackHandler = (state: 'add' | 'remove') => {
     if ((state === 'add' && !inLibrary) || (state === 'remove' && inLibrary)) {
-      dispatch(toggleTrackAction(props, state));
+      dispatch(updateLibraryAction(track, tracks, state === 'add', tokens));
     }
   };
 

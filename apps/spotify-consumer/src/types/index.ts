@@ -204,7 +204,8 @@ export interface LibraryState {
 }
 
 export interface LibraryAction extends BaseAction {
-  track?: Track;
+  tracks?: Track[];
+  library?: Track[];
   trackId?: string;
 }
 
