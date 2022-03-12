@@ -15,6 +15,7 @@ import { addNotificationAction } from './notifications.action';
 import { generateRandomString } from '../../utils';
 import { SpotifyService } from '../../services/spotify.service';
 import { FirebaseService } from '../../services/firebase.service';
+import { getLibraryAction } from './library.action';
 
 const spotifyService = new SpotifyService(
   process.env['NX_API_ENDPOINT'] ?? '',
@@ -53,7 +54,6 @@ export const signInSpotifyAction = Object.assign(
         }
         dispatch(addNotificationAction(notificationConfig));
       } catch (error) {
-        console.log(error);
         dispatch(signInSpotifyAction.fail(error as Error));
         dispatch(
           addNotificationAction({
@@ -86,10 +86,9 @@ export const signInFirebaseAction = Object.assign(
       const firebaseToken = await firebaseService.confirmSignInEmailLink(
         user.email
       );
-      console.log(firebaseToken);
       dispatch(signInFirebaseAction.success(user, firebaseToken));
+      dispatch(getLibraryAction({ firebase: firebaseToken }));
     } catch (error) {
-      console.log(error);
       dispatch(signInFirebaseAction.fail(error as Error));
     }
   },

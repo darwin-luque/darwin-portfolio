@@ -37,3 +37,29 @@ export const updateLibraryAction = Object.assign(
     }),
   }
 );
+
+export const getLibraryAction = Object.assign(
+  (tokens: Tokens) =>
+    async (dispatch: ThunkDispatch<RootState, {}, LibraryAction>) => {
+      dispatch(getLibraryAction.start());
+      try {
+        const library = await firebaseService.getLibrary(tokens.firebase!);
+        dispatch(getLibraryAction.success(library));
+      } catch (error) {
+        dispatch(getLibraryAction.fail(error as Error));
+      }
+    },
+  {
+    start: (): LibraryAction => ({
+      type: ActionTypes.GET_LIBRARY_START,
+    }),
+    success: (library: Track[]): LibraryAction => ({
+      type: ActionTypes.GET_LIBRARY_SUCCESS,
+      library,
+    }),
+    fail: (error: Error): LibraryAction => ({
+      type: ActionTypes.GET_LIBRARY_FAIL,
+      error,
+    }),
+  }
+);
