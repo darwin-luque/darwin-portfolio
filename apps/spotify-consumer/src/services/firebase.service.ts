@@ -5,30 +5,27 @@ import {
   signInWithEmailLink,
   UserCredential,
 } from 'firebase/auth';
-import { Firestore } from 'firebase/firestore';
+import { Database } from 'firebase/database'
+import { Track } from '../types';
 
 export class FirebaseService {
-  actionCodeSettings = {
+  authConfigs = {
     url: 'http://localhost:4200',
-    // This must be true.
     handleCodeInApp: true,
   };
 
-  constructor(private readonly db: Firestore, private readonly auth: Auth) {}
+  constructor(private readonly database: Database, private readonly auth: Auth) {}
 
+  // Firebase Auth Services
   async sendSignInEmailLink(email: string): Promise<void> {
-    await sendSignInLinkToEmail(this.auth, email, this.actionCodeSettings);
+    await sendSignInLinkToEmail(this.auth, email, this.authConfigs);
   }
 
   async confirmSignInEmailLink(email: string): Promise<UserCredential> {
     if (!isSignInWithEmailLink(this.auth, window.location.href)) {
       throw new Error('Invalid authentication method');
     }
-    return signInWithEmailLink(
-      this.auth,
-      email,
-      window.location.href
-    );
+    return signInWithEmailLink(this.auth, email, window.location.href);
   }
 
   async refreshToken(creds: UserCredential): Promise<UserCredential> {
@@ -39,4 +36,9 @@ export class FirebaseService {
   signOut(): Promise<void> {
     return this.auth.signOut();
   }
+
+  // Firebase DB Services
+  uploadLibrary(library: Track[]) {}
+
+  getLibrary() {}
 }
