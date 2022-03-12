@@ -5,8 +5,24 @@ import {
   signInWithEmailLink,
   UserCredential,
 } from 'firebase/auth';
-import { Database } from 'firebase/database'
+import {
+  Database,
+  set,
+  ref,
+  onValue as _onValue,
+  Query,
+  DataSnapshot,
+} from 'firebase/database';
 import { Track } from '../types';
+
+const onValue = (query: Query) =>
+  new Promise<DataSnapshot>((res, rej) => {
+    _onValue(
+      query,
+      (snapshot) => res(snapshot),
+      (error) => rej(error)
+    );
+  });
 
 export class FirebaseService {
   authConfigs = {
@@ -14,7 +30,10 @@ export class FirebaseService {
     handleCodeInApp: true,
   };
 
-  constructor(private readonly database: Database, private readonly auth: Auth) {}
+  constructor(
+    private readonly database: Database,
+    private readonly auth: Auth
+  ) {}
 
   // Firebase Auth Services
   async sendSignInEmailLink(email: string): Promise<void> {
@@ -38,7 +57,19 @@ export class FirebaseService {
   }
 
   // Firebase DB Services
-  uploadLibrary(library: Track[]) {}
+  async uploadLibrary(
+    creds: UserCredential,
+    library: Track[]
+  ): Promise<Track[]> {
+    await set(ref(this.database, `libraries/${creds.user.uid}`), library);
+    return library;
+  }
 
-  getLibrary() {}
+  async getLibrary(creds: UserCredential): Promise<Track[]> {
+    const dataSnapshot = await onValue(
+      ref(this.database, `libraries/${creds.user.uid}`)
+    );
+
+    return dataSnapshot.val() ?? [];
+  }
 }
