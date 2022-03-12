@@ -1,0 +1,15 @@
+.tracks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  background-color: var(--color-4);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.track {
+  width: 21%;
+  min-width: 300px;
+  margin: 1% 2%;
+}
