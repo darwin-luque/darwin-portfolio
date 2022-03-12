@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Buffer } from 'buffer';
 import {
   Album,
   Country,
@@ -11,20 +12,33 @@ import {
   TracksOfAlbum,
   User,
 } from '../types';
+import { trasnforToURLEncodedForm } from '../utils';
 
 export class SpotifyService {
-  constructor(private readonly apiUrl: string) {}
+  constructor(
+    private readonly apiUrl: string,
+    private readonly authUrl?: string
+  ) {}
 
   async signIn(authData: SpotifyAuthResponse): Promise<SpotifyCredentials> {
     const token: AxiosResponse<SpotifyCredentials> = await axios.post(
-      `${this.apiUrl}/token`,
-      {
-        grant_type: 'authroization_code',
+      `${this.authUrl}/api/token`,
+      trasnforToURLEncodedForm({
+        grant_type: 'authorization_code',
         code: authData.code!,
-        redirectUri: process.env['NX_REDIRECT_URI'],
-      },
+        redirect_uri: process.env['NX_REDIRECT_URI'] ?? '',
+      }),
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization:
+            'Basic ' +
+            Buffer.from(
+              process.env['NX_CLIENT_ID'] +
+                ':' +
+                process.env['NX_CLIENT_SECRET']
+            ).toString('base64'),
+        },
       }
     );
 
@@ -44,11 +58,25 @@ export class SpotifyService {
   async refreshToken(token: SpotifyCredentials): Promise<SpotifyCredentials> {
     const newToken: AxiosResponse<{
       access_token: string;
-      expires_in: string;
+      expires_in: number;
     }> = await axios.post(
-      `${this.apiUrl}/refresh`,
-      { refresh_token: token.refresh_token },
-      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      `${this.authUrl}/api/token`,
+      trasnforToURLEncodedForm({
+        grant_type: 'refresh_token',
+        refresh_token: token.refresh_token,
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization:
+            'Basic ' +
+            Buffer.from(
+              process.env['NX_CLIENT_ID'] +
+                ':' +
+                process.env['NX_CLIENT_SECRET']
+            ).toString('base64'),
+        },
+      }
     );
 
     return { ...token, ...newToken.data };

@@ -21,6 +21,7 @@ const variants: Variants = {
 
 interface SidebarElementProps {
   shouldAddEffectOnMouseActivity?: boolean;
+  show?: boolean;
   onElementClick?: () => void;
   onToggleSidebar?: () => void;
   children?: ReactNode;
@@ -30,6 +31,7 @@ interface SidebarElementProps {
 const SidebarElement = ({
   onToggleSidebar,
   onElementClick,
+  show = true,
   children,
   name,
   shouldAddEffectOnMouseActivity = false,
@@ -39,7 +41,7 @@ const SidebarElement = ({
     onElementClick && onElementClick();
   };
 
-  return (
+  return show ? (
     <motion.li
       whileHover={
         shouldAddEffectOnMouseActivity ? { scale: 1.05, cursor: 'pointer' } : {}
@@ -56,7 +58,7 @@ const SidebarElement = ({
         </button>
       )}
     </motion.li>
-  );
+  ) : null;
 };
 
 export default SidebarElement;

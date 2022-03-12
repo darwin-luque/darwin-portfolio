@@ -1,6 +1,6 @@
 import { Drawer, MenuToggle } from '@darwin-portfolio/react/ui';
-import { useCycle } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
+import { useCycle } from 'framer-motion';
 import { Tokens, User } from '../../../../types';
 import ProfileSection from '../../profile-section/profile-section';
 import SidebarElement from './sidebar-element/sidebar-element';
@@ -37,17 +37,22 @@ const Sidebar = ({ user, tokens, onSignIn, onSignOut }: SidebarProps) => {
           <SidebarElement
             key={id}
             name={name}
+            show={
+              to === '/library' ? !!tokens?.spotify && !!tokens?.firebase : true
+            }
             shouldAddEffectOnMouseActivity
             onToggleSidebar={toggleShowSidebar}
             onElementClick={() => history.push(to)}
           />
         ))}
-        <SidebarElement
-          name="Sign Out"
-          onElementClick={onSignOut}
-          shouldAddEffectOnMouseActivity
-          onToggleSidebar={toggleShowSidebar}
-        />
+        {!!tokens?.spotify && !!tokens?.firebase && (
+          <SidebarElement
+            name="Sign Out"
+            onElementClick={onSignOut}
+            shouldAddEffectOnMouseActivity
+            onToggleSidebar={toggleShowSidebar}
+          />
+        )}
       </ul>
       <MenuToggle onToggle={toggleShowSidebar} />
     </Drawer>

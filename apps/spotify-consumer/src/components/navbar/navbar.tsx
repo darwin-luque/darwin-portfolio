@@ -25,7 +25,7 @@ const Navbar = () => {
   const signInHandler = () => {
     const a = document.createElement('a');
     const state = generateRandomString(16);
-    a.href = `${process.env['NX_AUTH_ENDPOINT']}?${queryString.stringify({
+    a.href = `${process.env['NX_AUTH_ENDPOINT']}/authorize?${queryString.stringify({
       response_type: 'code',
       client_id: process.env['NX_CLIENT_ID'],
       scope: 'user-read-private user-read-email',

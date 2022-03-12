@@ -24,7 +24,7 @@ export interface SpotifyAuthResponse {
 
 export interface SpotifyCredentials {
   access_token: string;
-  expires_in: string;
+  expires_in: number;
   state: string;
   token_type: string;
   scope: string;

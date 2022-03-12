@@ -16,7 +16,10 @@ import { generateRandomString } from '../../utils';
 import { SpotifyService } from '../../services/spotify.service';
 import { FirebaseService } from '../../services/firebase.service';
 
-const spotifyService = new SpotifyService(process.env['NX_API_ENDPOINT'] ?? '');
+const spotifyService = new SpotifyService(
+  process.env['NX_API_ENDPOINT'] ?? '',
+  process.env['NX_AUTH_ENDPOINT'] ?? ''
+);
 const firebaseService = new FirebaseService(db, auth);
 
 export const signInSpotifyAction = Object.assign(
@@ -24,6 +27,7 @@ export const signInSpotifyAction = Object.assign(
     async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
       dispatch(signInSpotifyAction.start());
       try {
+        console.log('Sign in with spotify')
         const token = await spotifyService.signIn(authResponse);
         const user = await spotifyService.userProfile(token);
         if (shouldSendEmail) {
@@ -49,6 +53,7 @@ export const signInSpotifyAction = Object.assign(
         }
         dispatch(addNotificationAction(notificationConfig));
       } catch (error) {
+        console.log(error);
         dispatch(signInSpotifyAction.fail(error as Error));
         dispatch(
           addNotificationAction({
@@ -108,8 +113,15 @@ export const refreshTokenAction = Object.assign(
       dispatch(refreshTokenAction.start());
       try {
         const spotifyToken = await spotifyService.refreshToken(tokens.spotify!);
-        
-        dispatch(refreshTokenAction.success());
+        const firebaseToken = await firebaseService.refreshToken(
+          tokens.firebase!
+        );
+        dispatch(
+          refreshTokenAction.success({
+            spotify: spotifyToken,
+            firebase: firebaseToken,
+          })
+        );
       } catch (error) {
         dispatch(refreshTokenAction.fail(error as Error));
       }

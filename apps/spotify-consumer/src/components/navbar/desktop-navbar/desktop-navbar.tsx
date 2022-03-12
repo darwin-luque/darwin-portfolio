@@ -47,12 +47,16 @@ const DesktopNavbar = ({
         {pagesElements.map((element) => (
           <NavbarElement
             {...element}
-            show={element.to === '/library' ? !!user : true}
+            show={
+              element.to === '/library'
+                ? !!tokens.spotify && !!tokens.firebase
+                : true
+            }
             selected={pathname === element.to}
             key={element.id}
           />
         ))}
-        {pathname === '/' && !!user && (
+        {pathname === '/' && !!tokens.spotify && !!tokens.firebase && (
           <SearchBar
             inputValue={searchValue}
             showBar={showSearchBar}

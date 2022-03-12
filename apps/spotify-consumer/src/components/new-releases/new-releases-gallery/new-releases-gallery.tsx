@@ -22,35 +22,39 @@ const NewReleasesGallery = () => {
   }, [tokens, newReleases.length, gettingLocation]);
 
   useEffect(() => {
-    const success: PositionCallback = async (pos) => {
-      const geolocation: AxiosResponse<GeolocationResponse> = await axios.get(
-        `${process.env['NX_GEOLOCATION']}&lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`
-      );
-      setCountryCode(geolocation.data.countryCode);
-    };
+    const timeoutId = setTimeout(() => {
+      const success: PositionCallback = async (pos) => {
+        const geolocation: AxiosResponse<GeolocationResponse> = await axios.get(
+          `${process.env['NX_GEOLOCATION']}&lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`
+        );
+        setCountryCode(geolocation.data.countryCode);
+      };
 
-    const errors = () => setCountryCode(undefined);
+      const errors = () => setCountryCode(undefined);
 
-    if (navigator.geolocation) {
-      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-        switch (result.state) {
-          case 'granted':
-            navigator.geolocation.getCurrentPosition(success);
-            break;
-          case 'prompt':
-            navigator.geolocation.getCurrentPosition(success, errors, {
-              enableHighAccuracy: true,
-              timeout: 5000,
-              maximumAge: 0,
-            });
-            break;
-          case 'denied':
-          default:
-            setCountryCode(undefined);
-        }
-        setGettingLocation(false);
-      });
-    }
+      if (navigator.geolocation) {
+        navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+          switch (result.state) {
+            case 'granted':
+              navigator.geolocation.getCurrentPosition(success);
+              break;
+            case 'prompt':
+              navigator.geolocation.getCurrentPosition(success, errors, {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0,
+              });
+              break;
+            case 'denied':
+            default:
+              setCountryCode(undefined);
+          }
+          setGettingLocation(false);
+        });
+      }
+    });
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const trackCardMinWidth = 300;

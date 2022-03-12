@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import Navbar from '../navbar/navbar';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import {
+  refreshTokenAction,
   signInFirebaseAction,
   signInSpotifyAction,
 } from '../../store/actions/auth.action';
@@ -18,9 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { user, tokens } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    const spotifyQuery = queryString.parse(
-      location.hash || location.search
-    );
+    const spotifyQuery = queryString.parse(location.hash || location.search);
 
     if (!tokens?.spotify && spotifyQuery['code']) {
       dispatch(
@@ -34,6 +33,17 @@ const Layout = ({ children }: LayoutProps) => {
       dispatch(signInFirebaseAction(user));
     }
   }, [location, tokens, user]);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timer;
+    if (tokens.firebase && tokens.spotify) {
+      intervalId = setInterval(() => {
+        dispatch(refreshTokenAction(tokens)); 
+      }, tokens.spotify.expires_in * 999);
+    }
+
+    return () => clearTimeout(intervalId);
+  }, [tokens]);
 
   return (
     <div className={classes['layout']}>

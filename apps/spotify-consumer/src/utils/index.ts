@@ -13,3 +13,12 @@ export const updateObject = <T>(obj: T, newParams: Partial<T>): T => ({
   ...obj,
   ...newParams,
 });
+
+export const trasnforToURLEncodedForm = (data: { [key: string]: string }): URLSearchParams => {
+  const encodedData = new URLSearchParams();
+  Object.entries(data).forEach(([key, value]) => {
+    encodedData.append(key, value);
+  });
+
+  return encodedData;
+}

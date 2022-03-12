@@ -31,6 +31,11 @@ export class FirebaseService {
     );
   }
 
+  async refreshToken(creds: UserCredential): Promise<UserCredential> {
+    await creds.user.getIdToken(true);
+    return creds;
+  }
+
   signOut(): Promise<void> {
     return this.auth.signOut();
   }

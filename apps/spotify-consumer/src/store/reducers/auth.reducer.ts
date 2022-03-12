@@ -53,7 +53,7 @@ const authReducer = (state = initialState, action: AuthAction) => {
     case ActionTypes.SIGN_OUT:
       return updateObject(state, {
         user: undefined,
-        tokens: undefined,
+        tokens: {},
       })
 
     default:
