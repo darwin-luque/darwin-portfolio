@@ -2,7 +2,7 @@
   position: relative;
   padding: 25px;
   height: fit-content;
-  flex: 0 0 70%;
+  flex: 0 0 60%;
 }
 
 .card-content-container {
@@ -45,16 +45,16 @@
   transform: translateX(-50%);
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (min-width: 800px) {
   .card {
-    flex: 0 0 80%;
+    flex: 0 0 70%;
     max-width: 50%;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 600px) {
   .card {
-    flex: 1 0 95%;
+    flex: 0 0 80%;
     max-width: 100%;
     padding-left: 0;
     padding-right: 0;
