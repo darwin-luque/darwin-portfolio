@@ -1,0 +1,55 @@
+.track {
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+  list-style: none;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  border-radius: 2rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  background-color: var(--color-4);
+  opacity: 0.9;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.art {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: 40px 0;
+  margin-right: 20px;
+}
+
+.name,
+.album,
+.duration,
+.button {
+  margin: 0 1%;
+  text-align: left;
+}
+
+.name {
+  width: 20%;
+}
+
+.album {
+  width: 50%;
+}
+
+.duration {
+  width: 5%;
+}
+
+.button {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+}
