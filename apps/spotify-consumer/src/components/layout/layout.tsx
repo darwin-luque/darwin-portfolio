@@ -4,6 +4,7 @@ import Navbar from '../navbar/navbar';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { signInFirebaseAction, signInSpotifyAction } from '../../store/actions/auth.action';
 import { SpotifyAuthResponse } from '../../types';
+import classes from './layout.module.css'
 
 interface LayoutProps {
   children: ReactNode;
@@ -32,9 +33,13 @@ const Layout = ({ children }: LayoutProps) => {
   }, [location, tokens, user]);
 
   return (
-    <div>
-      <Navbar />
-      {children}
+    <div className={classes['layout']}>
+      <div className={classes['navbar']}>
+        <Navbar />
+      </div>
+      <div className={classes['app']}>
+        {children}
+      </div>
     </div>
   );
 };
