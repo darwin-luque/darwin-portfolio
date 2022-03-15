@@ -196,8 +196,8 @@ export interface MusicAction extends BaseAction {
 
 export interface LibraryState {
   loading: {
-    add: boolean;
-    remove: boolean;
+    update: boolean;
+    get: boolean;
   }
   tracks: Track[];
   error?: Error | string;

@@ -12,7 +12,6 @@ import MobileNavbar from './mobile-navbar/mobile-navbar';
 import classes from './navbar.module.css';
 
 const Navbar = () => {
-  const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const { user, tokens } = useAppSelector((state) => state.auth);
   const location = useLocation();

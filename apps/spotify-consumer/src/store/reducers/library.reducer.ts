@@ -7,8 +7,8 @@ import { ActionTypes } from '../constants/action-types';
 
 const initialState: LibraryState = {
   loading: {
-    add: false,
-    remove: false,
+    update: false,
+    get: false,
   },
   tracks: [],
 };
@@ -18,23 +18,47 @@ const libraryReducer = (state = initialState, action: LibraryAction) => {
     case ActionTypes.UPDATE_LIBRARY_START:
       return updateObject(state, {
         loading: updateObject(state.loading, {
-          add: true,
+          update: true,
         }),
       });
     case ActionTypes.UPDATE_LIBRARY_SUCCESS:
       return updateObject(state, {
         tracks: action.tracks!,
         loading: updateObject(state.loading, {
-          add: false,
+          update: false,
         }),
       });
     case ActionTypes.UPDATE_LIBRARY_FAIL:
       return updateObject(state, {
         error: action.error!,
         loading: updateObject(state.loading, {
-          add: false,
+          update: false,
         }),
       });
+    case ActionTypes.GET_LIBRARY_START:
+      return updateObject(state, {
+        loading: updateObject(state.loading, {
+          get: true,
+        }),
+      });
+    case ActionTypes.GET_LIBRARY_SUCCESS:
+      return updateObject(state, {
+        tracks: action.library!,
+        loading: updateObject(state.loading, {
+          get: false,
+        }),
+      });
+    case ActionTypes.GET_LIBRARY_FAIL:
+      return updateObject(state, {
+        error: action.error!,
+        loading: updateObject(state.loading, {
+          get: false,
+        }),
+      });
+    case ActionTypes.SIGN_OUT:
+      return updateObject(state, {
+        tracks: [],
+      })
     default:
       return state;
   }
