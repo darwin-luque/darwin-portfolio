@@ -1,5 +1,5 @@
 import { motion, useCycle } from 'framer-motion';
-import ArrowIcon from '../../../assets/icons/arrow.icon';
+import ArrowIcon from '../../../assets/icons/tsx/arrow.icon';
 import ProfileSection from '../profile-section/profile-section';
 import NavbarElement from './navbar-element/navbar-element';
 import SearchBar from '../search-bar/search-bar';
