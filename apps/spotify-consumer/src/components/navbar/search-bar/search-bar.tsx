@@ -1,6 +1,6 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
-import SearchIcon from '../../../assets/icons/search.icon';
-import XIcon from '../../../assets/icons/x.icon';
+import SearchIcon from '../../../assets/icons/tsx/search.icon';
+import XIcon from '../../../assets/icons/tsx/x.icon';
 import classes from './search-bar.module.css';
 
 const fadeInOutVariants: Variants = {

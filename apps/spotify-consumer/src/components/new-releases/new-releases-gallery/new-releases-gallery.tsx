@@ -16,7 +16,12 @@ const NewReleasesGallery = () => {
   const { width } = useWindowSize();
 
   useEffect(() => {
-    if (tokens && newReleases.length === 0 && !gettingLocation) {
+    if (
+      !!tokens.firebase &&
+      !!tokens.spotify &&
+      newReleases.length === 0 &&
+      !gettingLocation
+    ) {
       dispatch(getNewReleasesAction(tokens, countryCode));
     }
   }, [tokens, newReleases.length, gettingLocation]);

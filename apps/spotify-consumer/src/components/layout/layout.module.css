@@ -1,15 +1,24 @@
 .layout {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 .navbar {
   width: 100vw;
+  height: 19vh;
 }
 
 .app {
   width: 100vw;
-  flex: 1;
+  height: 81vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    height: 10.5vh;
+  }
+
+  .app {
+    height: 89.5vh;
+  }
 }
