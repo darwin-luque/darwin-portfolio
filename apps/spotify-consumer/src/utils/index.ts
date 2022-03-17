@@ -36,5 +36,5 @@ export const addOrRemoveTrackOnLibrary = (
     const inLibrary = library.map(({ id }) => id).includes(track.id ?? '');
     return inLibrary ? library : [...library, track!];
   }
-  return library.filter(({ id }) => id === track.id);
+  return library.filter(({ id }) => id !== track.id);
 };
