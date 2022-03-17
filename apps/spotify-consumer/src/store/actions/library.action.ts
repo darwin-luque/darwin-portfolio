@@ -14,6 +14,10 @@ export const updateLibraryAction = Object.assign(
       dispatch(updateLibraryAction.start());
       try {
         const updatedLibrary = addOrRemoveTrackOnLibrary(track, library, isAdd);
+        if (updatedLibrary.length === library.length) {
+          dispatch(updateLibraryAction.success(updatedLibrary));
+          return;
+        }
         const tracks = await firebaseService.uploadLibrary(
           tokens.firebase!,
           updatedLibrary
@@ -28,7 +32,7 @@ export const updateLibraryAction = Object.assign(
       type: ActionTypes.UPDATE_LIBRARY_START,
     }),
     success: (tracks: Track[]): LibraryAction => ({
-      type: ActionTypes.UPDATE_LIBRARY_START,
+      type: ActionTypes.UPDATE_LIBRARY_SUCCESS,
       tracks,
     }),
     fail: (error: Error): LibraryAction => ({

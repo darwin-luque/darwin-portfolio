@@ -28,7 +28,6 @@ export const signInSpotifyAction = Object.assign(
     async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
       dispatch(signInSpotifyAction.start());
       try {
-        console.log('Sign in with spotify')
         const token = await spotifyService.signIn(authResponse);
         const user = await spotifyService.userProfile(token);
         if (shouldSendEmail) {

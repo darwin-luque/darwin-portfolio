@@ -58,7 +58,7 @@ const libraryReducer = (state = initialState, action: LibraryAction) => {
     case ActionTypes.SIGN_OUT:
       return updateObject(state, {
         tracks: [],
-      })
+      });
     default:
       return state;
   }
