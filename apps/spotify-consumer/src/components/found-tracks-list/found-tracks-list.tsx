@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { updateLibraryAction } from '../../store/actions/library.action';
 import { Track } from '../../types';
-import FoundTracksElement from './found-tracks-elements/found-tracks-elements';
+import FoundTracksElement from './found-tracks-element/found-tracks-element';
 import classes from './found-tracks-list.module.css';
 
 const FoundTracksList = () => {
