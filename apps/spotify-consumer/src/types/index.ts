@@ -101,7 +101,7 @@ export interface Album {
 export interface Track {
   artists: Artist[];
   album?: Album;
-  available_markets: Country;
+  available_markets: Country[];
   disc_number: number;
   duration_ms: number;
   explicit: number;

@@ -33,17 +33,30 @@ const FoundTracksElement = ({
   onToggleTrack,
 }: FoundTracksElementProps) => (
   <motion.li
+    data-testid="found-tracks-element"
     variants={variants}
     whileHover={{ scale: 1.02, opacity: 1 }}
     className={classes['track']}
   >
     <div className={classes['content']}>
-      <img src={album?.images[0].url} alt="album" className={classes['art']} />
-      <p className={classes['name']}>{name}</p>
-      {album && <p className={classes['album']}>{album.name}</p>}
-      <p className={classes['duration']}>{moment(duration_ms).format('m:s')}</p>
+      <img
+        data-testid="album-art"
+        src={album?.images[0].url}
+        alt="album"
+        className={classes['art']}
+      />
+      <p data-testid="name" className={classes['name']}>
+        {name}
+      </p>
+      {album && (
+        <p data-testid="album-name" className={classes['album']}>
+          {album.name}
+        </p>
+      )}
+      <p data-testid="track-duration" className={classes['duration']}>{moment(duration_ms).format('m:ss')}</p>
     </div>
     <motion.button
+      data-testid="toggle-track-button"
       whileHover={{ scale: 1.02, cursor: 'pointer' }}
       whileTap={{ scale: 0.95 }}
       className={classes['button']}
