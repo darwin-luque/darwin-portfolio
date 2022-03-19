@@ -59,8 +59,6 @@ export interface User {
   };
   href: string;
   images: SpotifyImage[];
-  product: string;
-  type: SpotifyType;
   uri: string;
 }
 

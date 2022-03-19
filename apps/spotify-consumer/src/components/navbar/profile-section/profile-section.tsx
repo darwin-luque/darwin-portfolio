@@ -20,6 +20,7 @@ const ProfileSection = ({
       tokens?.firebase && !!user ? (
         <>
           <img
+            data-testid="avatar"
             className={classes['avatar']}
             src={user.images[0].url}
             alt="user avatar"
@@ -35,6 +36,7 @@ const ProfileSection = ({
       )
     ) : (
       <motion.button
+        data-testid="sign-in-btn"
         className={classes['message']}
         onClick={onSignIn}
         whileHover={{ scale: 1.02, cursor: 'pointer' }}
