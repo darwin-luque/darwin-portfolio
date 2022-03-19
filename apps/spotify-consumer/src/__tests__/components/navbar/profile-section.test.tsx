@@ -64,7 +64,7 @@ describe('<ProfileSection />', () => {
         <ProfileSection onSignIn={() => null} tokens={{}} user={mockUser} />
       );
 
-      expect(screen.getByText('Sign in with Spotify first')).toBeDefined();
+      expect(screen.getByText('Sign in with Spotify first')).toBeInTheDocument();
     });
 
     it('Should execute a function when the sign in with spotify text is clicked', () => {
@@ -87,7 +87,7 @@ describe('<ProfileSection />', () => {
         />
       );
 
-      expect(screen.getByText('Confirm email we sent')).toBeDefined();
+      expect(screen.getByText('Confirm email we sent')).toBeInTheDocument();
     });
   });
 
@@ -100,7 +100,7 @@ describe('<ProfileSection />', () => {
       />
     );
 
-    expect(screen.getByText(mockUser.display_name)).toBeDefined();
+    expect(screen.getByText(mockUser.display_name)).toBeInTheDocument();
     expect(screen.getByTestId(/avatar/i).getAttribute('src')).toEqual(
       mockUser.images[0].url
     );

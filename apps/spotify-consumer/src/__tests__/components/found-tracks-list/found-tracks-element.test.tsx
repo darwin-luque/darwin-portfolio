@@ -53,7 +53,7 @@ describe('<FoundTracksElements />', () => {
   it('Should display the track name', () => {
     render(<FoundTracksElement {...mockTrack} onToggleTrack={() => null} />);
 
-    expect(screen.getByText(mockTrack.name)).toBeDefined();
+    expect(screen.getByText(mockTrack.name)).toBeInTheDocument();
   });
 
   it('Should display the duration time parsed as m:ss', () => {
@@ -67,7 +67,7 @@ describe('<FoundTracksElements />', () => {
   it('Should display the album name', () => {
     render(<FoundTracksElement {...mockTrack} onToggleTrack={() => null} />);
 
-    expect(screen.getByText(mockAlbum.name)).toBeDefined();
+    expect(screen.getByText(mockAlbum.name)).toBeInTheDocument();
   });
 
   describe('Trigger Callback', () => {
@@ -113,7 +113,7 @@ describe('<FoundTracksElements />', () => {
         />
       );
 
-      expect(screen.getByText('-')).toBeDefined();
+      expect(screen.getByText('-')).toBeInTheDocument();
     });
 
     it('Should show a "+" if the track is not in library', () => {
@@ -126,7 +126,7 @@ describe('<FoundTracksElements />', () => {
         />
       );
 
-      expect(screen.getByText('+')).toBeDefined();
+      expect(screen.getByText('+')).toBeInTheDocument();
     });
   });
 });
