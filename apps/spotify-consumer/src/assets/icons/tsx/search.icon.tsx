@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 
 const SearchIcon = ({ size = 32, color = '#eee' }) => (
   <motion.svg
+    data-testid="search-icon"
     width={size}
     height={size}
     viewBox="0 0 24 24"

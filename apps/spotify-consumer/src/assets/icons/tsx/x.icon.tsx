@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 
 const XIcon = ({ size = 32, color = '#eee' }) => (
   <motion.svg
+    data-testid="x-icon"
     viewBox="0 0 24 24"
     role="presentation"
     width={size}

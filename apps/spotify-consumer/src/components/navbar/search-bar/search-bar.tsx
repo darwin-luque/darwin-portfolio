@@ -1,4 +1,4 @@
-import { motion, useAnimation, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import SearchIcon from '../../../assets/icons/tsx/search.icon';
 import XIcon from '../../../assets/icons/tsx/x.icon';
 import classes from './search-bar.module.css';
@@ -55,8 +55,9 @@ const SearchBar = ({
   onInputChange,
 }: SearchBarProps) => {
   return (
-    <div className={classes['container']}>
+    <div className={classes['container']} data-testid="search-bar">
       <motion.input
+        data-testid="search-input"
         layout
         variants={inputVariants}
         data-showbar={showBar}
@@ -69,6 +70,7 @@ const SearchBar = ({
         autoFocus
       />
       <motion.button
+        data-testid="icon-btn"
         variants={fadeInOutVariants}
         initial="initial"
         animate="center"
