@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import SearchBar from '../../../components/navbar/search-bar/search-bar';
+import SearchBar from '../../../../components/navbar/search-bar/search-bar';
 
 describe('<SearchBar />', () => {
   it('Should not render the input if show bar is false', () => {

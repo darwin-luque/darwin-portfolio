@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { UserCredential } from 'firebase/auth';
-import ProfileSection from '../../../components/navbar/profile-section/profile-section';
-import { SpotifyCredentials, User } from '../../../types';
+import ProfileSection from '../../../../components/navbar/profile-section/profile-section';
+import { SpotifyCredentials, User } from '../../../../types';
 
 const mockSpotifyToken: SpotifyCredentials = {
   access_token: 'mock-access-token',
