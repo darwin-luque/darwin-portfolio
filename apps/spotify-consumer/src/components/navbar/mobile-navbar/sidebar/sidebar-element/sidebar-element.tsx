@@ -43,6 +43,7 @@ const SidebarElement = ({
 
   return show ? (
     <motion.li
+      data-testid="sidebar-element"
       whileHover={
         shouldAddEffectOnMouseActivity ? { scale: 1.05, cursor: 'pointer' } : {}
       }
@@ -53,7 +54,11 @@ const SidebarElement = ({
       {children ? (
         children
       ) : (
-        <button className={classes['button']} onClick={clickHandler}>
+        <button
+          data-testid="sidebar-element-btn"
+          className={classes['button']}
+          onClick={clickHandler}
+        >
           {name}
         </button>
       )}
