@@ -15,7 +15,7 @@ const ProfileSection = ({
   textColor = '#eee',
   onSignIn,
 }: ProfileSectionProps) => (
-  <div className={classes['profile-section']}>
+  <div className={classes['profile-section']} data-testid="profile-section">
     {tokens?.spotify ? (
       tokens?.firebase && !!user ? (
         <>

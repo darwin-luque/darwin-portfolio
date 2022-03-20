@@ -6,7 +6,7 @@ import SearchBar from '../search-bar/search-bar';
 import classes from './desktop-navbar.module.css';
 import { Tokens, User } from '../../../types';
 
-const pagesElements = [
+export const pagesElements = [
   {
     id: 0,
     name: 'Home',
@@ -19,7 +19,7 @@ const pagesElements = [
   },
 ];
 
-interface DesktopNavbarInterface {
+export interface DesktopNavbarProps {
   user?: User;
   tokens: Tokens;
   pathname: string;
@@ -37,7 +37,7 @@ const DesktopNavbar = ({
   onSignOut,
   searchValue,
   setSearchValue,
-}: DesktopNavbarInterface) => {
+}: DesktopNavbarProps) => {
   const [showSearchBar, setShowSearchBar] = useCycle(false, true);
 
   return (
@@ -66,6 +66,7 @@ const DesktopNavbar = ({
         )}
         {!!user && (
           <motion.button
+            data-testid="sign-out-btn"
             onClick={onSignOut}
             whileHover={{ scale: 1.02, cursor: 'pointer' }}
             className={classes['sign-out']}
