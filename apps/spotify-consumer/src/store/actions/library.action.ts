@@ -11,17 +11,20 @@ const firebaseService = new FirebaseService(database, auth);
 export const updateLibraryAction = Object.assign(
   (track: Track, library: Track[], isAdd: boolean, tokens: Tokens) =>
     async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, LibraryAction>
+      dispatch: ThunkDispatch<RootState, unknown, LibraryAction>
     ) => {
       dispatch(updateLibraryAction.start());
       try {
+        if (!tokens.firebase) {
+          throw new Error('No valid firebase session');
+        }
         const updatedLibrary = addOrRemoveTrackOnLibrary(track, library, isAdd);
         if (updatedLibrary.length === library.length) {
           dispatch(updateLibraryAction.success(updatedLibrary));
           return;
         }
         const tracks = await firebaseService.uploadLibrary(
-          tokens.firebase!,
+          tokens.firebase,
           updatedLibrary
         );
         dispatch(updateLibraryAction.success(tracks));
@@ -47,11 +50,14 @@ export const updateLibraryAction = Object.assign(
 export const getLibraryAction = Object.assign(
   (tokens: Tokens) =>
     async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, LibraryAction>
+      dispatch: ThunkDispatch<RootState, unknown, LibraryAction>
     ) => {
       dispatch(getLibraryAction.start());
       try {
-        const library = await firebaseService.getLibrary(tokens.firebase!);
+        if (!tokens.firebase) {
+          throw new Error('No valid firebase session');
+        }
+        const library = await firebaseService.getLibrary(tokens.firebase);
         dispatch(getLibraryAction.success(library));
       } catch (error) {
         dispatch(getLibraryAction.fail(error as Error));

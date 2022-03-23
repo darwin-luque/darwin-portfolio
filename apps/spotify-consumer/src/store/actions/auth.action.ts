@@ -25,9 +25,7 @@ const firebaseService = new FirebaseService(database, auth);
 
 export const signInSpotifyAction = Object.assign(
   (authResponse: SpotifyAuthResponse, shouldSendEmail = true) =>
-    async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, AuthAction>
-    ) => {
+    async (dispatch: ThunkDispatch<RootState, unknown, AuthAction>) => {
       dispatch(signInSpotifyAction.start());
       try {
         const token = await spotifyService.signIn(authResponse);
@@ -82,9 +80,7 @@ export const signInSpotifyAction = Object.assign(
 
 export const signInFirebaseAction = Object.assign(
   (user: User) =>
-    async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, AuthAction>
-    ) => {
+    async (dispatch: ThunkDispatch<RootState, unknown, AuthAction>) => {
       dispatch(signInFirebaseAction.start());
       try {
         const firebaseToken = await firebaseService.confirmSignInEmailLink(
@@ -112,9 +108,7 @@ export const signInFirebaseAction = Object.assign(
 
 export const refreshTokenAction = Object.assign(
   (tokens: Tokens) =>
-    async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, AuthAction>
-    ) => {
+    async (dispatch: ThunkDispatch<RootState, unknown, AuthAction>) => {
       dispatch(refreshTokenAction.start());
       try {
         if (!tokens.spotify || !tokens.firebase) {

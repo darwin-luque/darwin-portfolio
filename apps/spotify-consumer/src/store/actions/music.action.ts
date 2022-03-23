@@ -11,7 +11,7 @@ const spotifyService = new SpotifyService(process.env['NX_API_ENDPOINT'] ?? '');
 export const getNewReleasesAction = Object.assign(
   (tokens: Tokens, countryCode?: Country) =>
     async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, MusicAction>
+      dispatch: ThunkDispatch<RootState, unknown, MusicAction>
     ) => {
       dispatch(getNewReleasesAction.start());
       try {
@@ -53,7 +53,7 @@ export const getNewReleasesAction = Object.assign(
 export const findTracksAction = Object.assign(
   (tokens: Tokens, query: string) =>
     async (
-      dispatch: ThunkDispatch<RootState, Record<string, unknown>, MusicAction>
+      dispatch: ThunkDispatch<RootState, unknown, MusicAction>
     ) => {
       dispatch(findTracksAction.start());
       try {
