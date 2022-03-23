@@ -9,6 +9,7 @@ import { signOutAction } from '../../store/actions/auth.action';
 import DesktopNavbar from './desktop-navbar/desktop-navbar';
 import MobileNavbar from './mobile-navbar/mobile-navbar';
 import classes from './navbar.module.css';
+import { NX_REDIRECT_URI } from '../../utils/constants';
 
 export interface NavbarProps {
   /**
@@ -32,7 +33,7 @@ const Navbar = ({ staticWidth }: NavbarProps) => {
       response_type: 'code',
       client_id: process.env['NX_CLIENT_ID'],
       scope: 'user-read-private user-read-email',
-      redirect_uri: process.env['NX_REDIRECT_URI'],
+      redirect_uri: NX_REDIRECT_URI,
       state,
     })}`;
 

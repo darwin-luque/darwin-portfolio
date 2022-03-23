@@ -26,7 +26,7 @@ const onValue = (query: Query) =>
 
 export class FirebaseService {
   authConfigs = {
-    url: 'http://localhost:4200',
+    url: process.env['NX_REDIRECT_URI'] ?? '',
     handleCodeInApp: true,
   };
 
