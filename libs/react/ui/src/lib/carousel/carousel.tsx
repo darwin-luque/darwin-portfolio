@@ -45,6 +45,7 @@ export const Carousel = <T extends { id: number | string }>({
         </motion.div>
       </AnimatePresence>
       <button
+        data-testid="next-button"
         type="button"
         className={classes['next']}
         onClick={() => paginate(1)}
@@ -52,6 +53,7 @@ export const Carousel = <T extends { id: number | string }>({
         ‣
       </button>
       <button
+        data-testid="prev-button"
         type="button"
         className={classes['prev']}
         onClick={() => paginate(-1)}

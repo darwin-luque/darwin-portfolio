@@ -27,6 +27,7 @@ interface ItemProps {
 
 const Item = ({ direction, children, minWidth }: ItemProps) => (
   <motion.div
+    data-testid="item"
     style={{ minWidth }}
     custom={direction}
     variants={variants}
