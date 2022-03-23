@@ -45,7 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
     }
 
     return () => clearTimeout(intervalId);
-  }, [tokens]);
+  }, [dispatch, tokens]);
 
   return (
     <div className={classes['layout']}>

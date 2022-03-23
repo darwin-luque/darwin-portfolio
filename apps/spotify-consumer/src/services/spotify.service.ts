@@ -13,7 +13,6 @@ import {
   User,
 } from '../types';
 import { trasnforToURLEncodedForm } from '../utils';
-import { NX_REDIRECT_URI } from '../utils/constants';
 
 export class SpotifyService {
   constructor(
@@ -27,7 +26,7 @@ export class SpotifyService {
       trasnforToURLEncodedForm({
         grant_type: 'authorization_code',
         code: authData.code ?? '',
-        redirect_uri: NX_REDIRECT_URI,
+        redirect_uri: process.env['NX_REDIRECT_URI'] ?? '',
       }),
       {
         headers: {
