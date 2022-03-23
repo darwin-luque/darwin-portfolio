@@ -13,13 +13,27 @@ const scaleTranslate = ({ x, y, scaleX, scaleY }: TransformProperties) =>
 interface TrackTitleProps {
   title: string;
   artist: string;
+  /**
+   * Testing purpose only!
+   * Framer motion has a rule for useInvertedScale that cannot be followed in unitesting.
+   */
+  shouldUseInverted?: boolean;
 }
 
-const TrackTitle = ({ title, artist }: TrackTitleProps) => {
-  const inverted = useDeprecatedInvertedScale();
+const TrackTitle = ({
+  title,
+  artist,
+  shouldUseInverted = true,
+}: TrackTitleProps) => {
+  let inverted = {};
+
+  if (shouldUseInverted) {
+    inverted = useDeprecatedInvertedScale();
+  }
 
   return (
     <motion.div
+      data-testid="track-title"
       className={classes['container']}
       initial={false}
       animate={{ x: 15, y: 15 }}

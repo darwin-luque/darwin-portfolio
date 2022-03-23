@@ -13,11 +13,13 @@ const TrackImage = ({
   backgroundColor,
 }: TrackImageProps) => (
   <motion.div
+    data-testid="track-image"
     className={classes['container']}
     layout="size"
     style={{ backgroundColor, originX: 0, originY: 0 }}
   >
     <motion.img
+      data-testid="track-image-img"
       src={src}
       className={classes['image']}
       alt="new release thumbnail"

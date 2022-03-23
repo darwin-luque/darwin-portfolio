@@ -50,6 +50,7 @@ export const Card = ({
 
   return (
     <motion.div
+      data-testid="card"
       whileHover={{ scale: 1.02 }}
       className={classes['card']}
       ref={containerRef}

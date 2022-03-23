@@ -11,6 +11,7 @@ const ToggleTrackButton = ({
 }: ToggleTrackButtonProps) => (
   <div className={classes['container']}>
     <button
+      data-testid="toggle-track-button"
       className={classes['button']}
       type="button"
       onClick={() => onToggleTrack(inLibrary ? 'remove' : 'add')}
