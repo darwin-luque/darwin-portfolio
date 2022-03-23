@@ -10,6 +10,7 @@ module.exports = {
     'firebase/auth': '<rootDir>/src/__mocks__/firebase/auth.js',
     'firebase/database': '<rootDir>/src/__mocks__/firebase/database.js',
     'firebase/firestore': '<rootDir>/src/__mocks__/firebase/firestore.js',
+    'react-router-dom': '<rootDir>/src/__mocks__/react-router-dom.js',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/spotify-consumer',

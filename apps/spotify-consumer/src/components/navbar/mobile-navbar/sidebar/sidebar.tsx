@@ -24,7 +24,7 @@ const Sidebar = ({ user, tokens, onSignIn, onSignOut }: SidebarProps) => {
 
   return (
     <Drawer show={showSidebar} side="left">
-      <ul className={classes['elements']}>
+      <ul className={classes['elements']} data-testid="sidebar">
         <SidebarElement>
           <ProfileSection
             textColor="#222831"

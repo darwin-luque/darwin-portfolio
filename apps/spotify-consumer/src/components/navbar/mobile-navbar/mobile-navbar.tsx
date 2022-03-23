@@ -25,7 +25,7 @@ const MobileNavbar = ({
   const [showSearchBar, setShowSearchBar] = useCycle(false, true);
 
   return (
-    <div className={classes['mobile-navbar']}>
+    <div className={classes['mobile-navbar']} data-testid="mobile-navbar">
       <Sidebar
         onSignIn={onSignIn}
         onSignOut={onSignOut}

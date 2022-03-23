@@ -41,7 +41,7 @@ const DesktopNavbar = ({
   const [showSearchBar, setShowSearchBar] = useCycle(false, true);
 
   return (
-    <nav className={classes['navbar']}>
+    <nav className={classes['navbar']} data-testid="desktop-navbar">
       <ProfileSection tokens={tokens} user={user} onSignIn={onSignIn} />
       <div className={classes['navbar-elements']}>
         {pagesElements.map((element) => (

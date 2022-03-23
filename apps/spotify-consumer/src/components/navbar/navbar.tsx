@@ -1,7 +1,6 @@
 import { useWindowSize } from '@darwin-portfolio/react/hooks';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useCycle } from 'framer-motion';
 import queryString from 'query-string';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { findTracksAction } from '../../store/actions/music.action';
@@ -11,16 +10,21 @@ import DesktopNavbar from './desktop-navbar/desktop-navbar';
 import MobileNavbar from './mobile-navbar/mobile-navbar';
 import classes from './navbar.module.css';
 
-const Navbar = () => {
+export interface NavbarProps {
+  /**
+   * For testing purpose only!
+   */
+  staticWidth?: number
+}
+
+const Navbar = ({ staticWidth }: NavbarProps) => {
   const [searchValue, setSearchValue] = useState('');
   const { user, tokens } = useAppSelector((state) => state.auth);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { width } = useWindowSize();
-  const isMobile = 768 >= (width ?? 0);
+  const isMobile = 768 >= (staticWidth ?? width ?? 0);
 
-  // TODO: Use response_type: 'code' instead of 'token' and then request token
-  // Because wiht current flow there is no refresh token
   const signInHandler = () => {
     const a = document.createElement('a');
     const state = generateRandomString(16);
