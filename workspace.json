@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "firebase-test": "apps/firebase-test",
     "react-hook": "libs/react/hooks",
     "react-ui": "libs/react/ui",
     "spotify-consumer": "apps/spotify-consumer",

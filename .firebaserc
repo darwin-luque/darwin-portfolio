@@ -1,6 +1,7 @@
 {
   "projects": {
-    "spotify-app": "spotify-app-4c4f3"
+    "spotify-app": "spotify-app-4c4f3",
+    "default": "spotify-app-4c4f3"
   },
   "targets": {}
 }

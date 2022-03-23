@@ -7,7 +7,7 @@
     "indexes": "apps/spotify-consumer/firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/spotify-consumer",
+    "public": "dist/apps/spotify-consumer",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

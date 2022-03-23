@@ -6,8 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "predeploy": "nx build spotify-consumer --buildLibsFromSource --prod --baseHref=/darwin-portfolio/",
-    "deploy": "gh-pages -d dist/apps/spotify-consumer"
+    "predeploy:spotify-consumer": "nx build spotify-consumer --buildLibsFromSource --prod --skip-nx-cache",
+    "deploy:spotify-consumer": "nx deploy spotify-consumer --only hosting --skip-nx-cache"
   },
   "private": true,
   "dependencies": {
