@@ -67,6 +67,24 @@
         "jestConfig": "apps/spotify-consumer/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "firebase deploy --config firebase.spotify-consumer.json"
+      }
+    },
+    "getconfig": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "firebase functions:config:get --config firebase.spotify-consumer.json > apps/spotify-consumer/.runtimeconfig.json"
+      }
+    },
+    "emulate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "firebase emulators:start --config firebase.spotify-consumer.json"
+      }
     }
   },
   "tags": []

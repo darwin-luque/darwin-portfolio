@@ -1,0 +1,46 @@
+{
+  "database": {
+    "rules": "apps/spotify-consumer/database.rules.json"
+  },
+  "firestore": {
+    "rules": "apps/spotify-consumer/firestore.rules",
+    "indexes": "apps/spotify-consumer/firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "dist/spotify-consumer",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "apps/spotify-consumer/storage.rules"
+  },
+  "functions": {
+    "predeploy": [
+      "npx nx build spotify-consumer",
+      "npx nx lint spotify-consumer"
+    ],
+    "source": "dist/apps/spotify-consumer"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "auth": {
+      "port": "9099"
+    },
+    "pubsub": {
+      "port": "8085"
+    }
+  }
+}
