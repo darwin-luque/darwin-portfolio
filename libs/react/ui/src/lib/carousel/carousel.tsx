@@ -34,7 +34,7 @@ export const Carousel = <T extends { id: number | string }>({
   };
 
   return (
-    <div className={classes['container']}>
+    <div className={classes['container']} data-testid="carousel">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div className={classes['items']}>
           {[...data].splice(page, itemsPerPage).map((val) => (
