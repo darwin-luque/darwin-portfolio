@@ -16,6 +16,7 @@ export const MenuToggle = ({
   color = 'hsl(0, 0%, 18%)',
 }: MenuToggleProps) => (
   <button
+    data-testid="menu-toggle"
     style={{ width: size, height: size }}
     className={classes['toggler']}
     onClick={onToggle}

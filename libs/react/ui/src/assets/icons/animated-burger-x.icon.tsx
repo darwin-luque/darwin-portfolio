@@ -9,8 +9,8 @@ const Path = (props: SVGMotionProps<SVGPathElement>) => (
   />
 );
 
-const AnimatedBurgerXIcon = ({ size = 24, color = 'hsl(0, 0%, 18%)' }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24">
+export const AnimatedBurgerXIcon = ({ size = 24, color = 'hsl(0, 0%, 18%)' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" data-testid="animated-burger-x-icon">
     <Path
       variants={{
         closed: { d: 'M 2 2.5 L 20 2.5' },

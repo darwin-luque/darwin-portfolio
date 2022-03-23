@@ -55,6 +55,10 @@ interface SidebarProps {
   minSize?: number;
   backgroundColor?: typeof typingStyle.color;
   side?: 'top' | 'bottom' | 'left' | 'right';
+  /**
+   * Testing purpose only!!!
+   */
+  testingHeight?: number;
 }
 
 export const Drawer = ({
@@ -64,6 +68,7 @@ export const Drawer = ({
   maxSize = 500,
   minSize = 300,
   backgroundColor = '#eee',
+  testingHeight,
 }: SidebarProps) => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
@@ -80,10 +85,11 @@ export const Drawer = ({
 
   return (
     <motion.nav
+      data-testid="drawer"
       initial={false}
       variants={sidebarContainer}
       animate={show ? 'open' : 'closed'}
-      custom={height}
+      custom={testingHeight ?? height}
       ref={containerRef}
       style={sizeStyles}
       className={`${classes[side]} ${show && classes['show']}`}
