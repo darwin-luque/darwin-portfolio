@@ -10,7 +10,7 @@ import {
 import { SpotifyAuthResponse } from '../../types';
 import classes from './layout.module.css';
 
-interface LayoutProps {
+export interface LayoutProps {
   children: ReactNode;
 }
 

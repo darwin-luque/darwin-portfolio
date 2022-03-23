@@ -58,7 +58,7 @@ const Navbar = ({ staticWidth }: NavbarProps) => {
   const ResponsiveNavbar = isMobile ? MobileNavbar : DesktopNavbar;
 
   return (
-    <span className={classes['navbar']}>
+    <span className={classes['navbar']} data-testid="navbar">
       <ResponsiveNavbar
         setSearchValue={setSearchValue}
         pathname={location.pathname}
