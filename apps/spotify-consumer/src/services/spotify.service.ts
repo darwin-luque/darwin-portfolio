@@ -25,7 +25,7 @@ export class SpotifyService {
       `${this.authUrl}/api/token`,
       trasnforToURLEncodedForm({
         grant_type: 'authorization_code',
-        code: authData.code!,
+        code: authData.code ?? '',
         redirect_uri: process.env['NX_REDIRECT_URI'] ?? '',
       }),
       {

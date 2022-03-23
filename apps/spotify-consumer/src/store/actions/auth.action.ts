@@ -24,8 +24,10 @@ const spotifyService = new SpotifyService(
 const firebaseService = new FirebaseService(database, auth);
 
 export const signInSpotifyAction = Object.assign(
-  (authResponse: SpotifyAuthResponse, shouldSendEmail: boolean = true) =>
-    async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
+  (authResponse: SpotifyAuthResponse, shouldSendEmail = true) =>
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, AuthAction>
+    ) => {
       dispatch(signInSpotifyAction.start());
       try {
         const token = await spotifyService.signIn(authResponse);
@@ -79,18 +81,21 @@ export const signInSpotifyAction = Object.assign(
 );
 
 export const signInFirebaseAction = Object.assign(
-  (user: User) => async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
-    dispatch(signInFirebaseAction.start());
-    try {
-      const firebaseToken = await firebaseService.confirmSignInEmailLink(
-        user.email
-      );
-      dispatch(signInFirebaseAction.success(user, firebaseToken));
-      dispatch(getLibraryAction({ firebase: firebaseToken }));
-    } catch (error) {
-      dispatch(signInFirebaseAction.fail(error as Error));
-    }
-  },
+  (user: User) =>
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, AuthAction>
+    ) => {
+      dispatch(signInFirebaseAction.start());
+      try {
+        const firebaseToken = await firebaseService.confirmSignInEmailLink(
+          user.email
+        );
+        dispatch(signInFirebaseAction.success(user, firebaseToken));
+        dispatch(getLibraryAction({ firebase: firebaseToken }));
+      } catch (error) {
+        dispatch(signInFirebaseAction.fail(error as Error));
+      }
+    },
   {
     start: (): AuthAction => ({ type: ActionTypes.SIGN_IN_FIREBASE_START }),
     success: (user: User, firebaseToken: UserCredential): AuthAction => ({
@@ -107,12 +112,17 @@ export const signInFirebaseAction = Object.assign(
 
 export const refreshTokenAction = Object.assign(
   (tokens: Tokens) =>
-    async (dispatch: ThunkDispatch<RootState, {}, AuthAction>) => {
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, AuthAction>
+    ) => {
       dispatch(refreshTokenAction.start());
       try {
-        const spotifyToken = await spotifyService.refreshToken(tokens.spotify!);
+        if (!tokens.spotify || !tokens.firebase) {
+          throw new Error('No spotify and/or firebase session');
+        }
+        const spotifyToken = await spotifyService.refreshToken(tokens.spotify);
         const firebaseToken = await firebaseService.refreshToken(
-          tokens.firebase!
+          tokens.firebase
         );
         dispatch(
           refreshTokenAction.success({

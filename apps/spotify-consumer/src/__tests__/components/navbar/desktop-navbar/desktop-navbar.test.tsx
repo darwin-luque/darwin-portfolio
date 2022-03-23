@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { UserCredential } from 'firebase/auth';
-import { createMemoryHistory, To } from 'history';
+import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import DesktopNavbar, {
   DesktopNavbarProps,

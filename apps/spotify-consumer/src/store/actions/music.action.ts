@@ -10,23 +10,31 @@ const spotifyService = new SpotifyService(process.env['NX_API_ENDPOINT'] ?? '');
 
 export const getNewReleasesAction = Object.assign(
   (tokens: Tokens, countryCode?: Country) =>
-    async (dispatch: ThunkDispatch<RootState, {}, MusicAction>) => {
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, MusicAction>
+    ) => {
       dispatch(getNewReleasesAction.start());
       try {
         const albums = await spotifyService.getNewReleaseSingleAlbums(
           tokens,
           countryCode
         );
-        const tracks = await spotifyService.getTracksForManyAlbums(tokens, albums);
+        const tracks = await spotifyService.getTracksForManyAlbums(
+          tokens,
+          albums
+        );
         dispatch(getNewReleasesAction.success(tracks));
       } catch (error) {
         dispatch(getNewReleasesAction.fail(error as Error));
-        dispatch(addNotificationAction({
-          id: generateRandomString(),
-          content: (error as Error).message ?? 'Could not get the new releases',
-          title: 'Something went wrong!',
-          type: 'warning',
-        }));
+        dispatch(
+          addNotificationAction({
+            id: generateRandomString(),
+            content:
+              (error as Error).message ?? 'Could not get the new releases',
+            title: 'Something went wrong!',
+            type: 'warning',
+          })
+        );
       }
     },
   {
@@ -44,19 +52,24 @@ export const getNewReleasesAction = Object.assign(
 
 export const findTracksAction = Object.assign(
   (tokens: Tokens, query: string) =>
-    async (dispatch: ThunkDispatch<RootState, {}, MusicAction>) => {
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, MusicAction>
+    ) => {
       dispatch(findTracksAction.start());
       try {
         const foundTracks = await spotifyService.queryTracks(tokens, query);
         dispatch(findTracksAction.success(foundTracks));
       } catch (error) {
         dispatch(findTracksAction.fail(error as Error));
-        dispatch(addNotificationAction({
-          id: generateRandomString(),
-          content: (error as Error).message ?? 'Could not find the new tracks',
-          title: 'Something went wrong!',
-          type: 'warning',
-        }));
+        dispatch(
+          addNotificationAction({
+            id: generateRandomString(),
+            content:
+              (error as Error).message ?? 'Could not find the new tracks',
+            title: 'Something went wrong!',
+            type: 'warning',
+          })
+        );
       }
     },
   {

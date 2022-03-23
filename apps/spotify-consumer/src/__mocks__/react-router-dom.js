@@ -6,6 +6,7 @@ const useHistory = jest.fn().mockReturnValue({
   push: jest.fn(),
 });
 
-const Link = ({ to, ...props }) => <a {...props} href={to} />
+const Link = ({ to, children, ...props }) =>
+  <a {...props} href={to}>{children}</a>
 
 module.exports = { useLocation, useHistory, Link };

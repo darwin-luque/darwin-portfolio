@@ -10,7 +10,9 @@ const firebaseService = new FirebaseService(database, auth);
 
 export const updateLibraryAction = Object.assign(
   (track: Track, library: Track[], isAdd: boolean, tokens: Tokens) =>
-    async (dispatch: ThunkDispatch<RootState, {}, LibraryAction>) => {
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, LibraryAction>
+    ) => {
       dispatch(updateLibraryAction.start());
       try {
         const updatedLibrary = addOrRemoveTrackOnLibrary(track, library, isAdd);
@@ -44,7 +46,9 @@ export const updateLibraryAction = Object.assign(
 
 export const getLibraryAction = Object.assign(
   (tokens: Tokens) =>
-    async (dispatch: ThunkDispatch<RootState, {}, LibraryAction>) => {
+    async (
+      dispatch: ThunkDispatch<RootState, Record<string, unknown>, LibraryAction>
+    ) => {
       dispatch(getLibraryAction.start());
       try {
         const library = await firebaseService.getLibrary(tokens.firebase!);

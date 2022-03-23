@@ -5,7 +5,7 @@ import NavbarElement, {
   NavbarElementProps,
 } from '../../../../components/navbar/desktop-navbar/navbar-element/navbar-element';
 
-let pushSpy: jest.SpyInstance<void, [to: To, state?: any]>;
+let pushSpy: jest.SpyInstance<void, [to: To, state?: unknown]>;
 
 const RouterNavbarElement = (props: NavbarElementProps) => {
   const history = createMemoryHistory();

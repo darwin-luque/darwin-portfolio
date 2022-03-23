@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { ReactNode, useEffect } from 'react';
 import queryString from 'query-string';
 import Navbar from '../navbar/navbar';
@@ -17,6 +18,7 @@ export interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const dispatch = useAppDispatch();
   const { user, tokens } = useAppSelector((state) => state.auth);
+  const location = useLocation();
 
   useEffect(() => {
     const spotifyQuery = queryString.parse(location.hash || location.search);
@@ -32,7 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
     } else if (!tokens?.firebase && spotifyQuery['apiKey'] && user) {
       dispatch(signInFirebaseAction(user));
     }
-  }, [location, tokens, user]);
+  }, [location, tokens, user, dispatch]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timer;

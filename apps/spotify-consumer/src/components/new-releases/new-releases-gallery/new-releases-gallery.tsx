@@ -24,7 +24,7 @@ const NewReleasesGallery = () => {
     ) {
       dispatch(getNewReleasesAction(tokens, countryCode));
     }
-  }, [tokens, newReleases.length, gettingLocation]);
+  }, [tokens, newReleases.length, gettingLocation, countryCode, dispatch]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

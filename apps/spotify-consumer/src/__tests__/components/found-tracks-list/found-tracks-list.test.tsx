@@ -56,7 +56,7 @@ const getMockTracks = (length: number): Track[] =>
 
 describe('<FoundTracksList />', () => {
   let ProvidedFoundTracksList: (props: { foundTracks: Track[] }) => JSX.Element;
-  let store: MockStoreEnhanced<unknown, {}>;
+  let store: MockStoreEnhanced<unknown, unknown>;
   const tracksInLibraryLength = 10;
   const libraryTracks = getMockTracks(tracksInLibraryLength);
   const tokens = { spotify: 'spotify-token', firebase: 'firebase-token' };

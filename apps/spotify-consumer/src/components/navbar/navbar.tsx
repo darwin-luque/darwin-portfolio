@@ -47,7 +47,7 @@ const Navbar = ({ staticWidth }: NavbarProps) => {
       }
     }, 300);
     return () => clearTimeout(timeoutId);
-  }, [searchValue]);
+  }, [searchValue, dispatch, tokens]);
 
   const signOutHandler = () => {
     if (user) {

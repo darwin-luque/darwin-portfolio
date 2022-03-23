@@ -25,11 +25,7 @@ const TrackTitle = ({
   artist,
   shouldUseInverted = true,
 }: TrackTitleProps) => {
-  let inverted = {};
-
-  if (shouldUseInverted) {
-    inverted = useDeprecatedInvertedScale();
-  }
+  const inverted = useDeprecatedInvertedScale();
 
   return (
     <motion.div
@@ -39,7 +35,7 @@ const TrackTitle = ({
       animate={{ x: 15, y: 15 }}
       transition={springs.close}
       transformTemplate={scaleTranslate}
-      style={{ ...inverted, originX: 0, originY: 0 }}
+      style={{ ...(shouldUseInverted ? inverted : {}), originX: 0, originY: 0 }}
     >
       <span className={classes['artist']}>{artist}</span>
       <h2 className={classes['title']}>{title}</h2>

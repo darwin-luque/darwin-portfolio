@@ -5,7 +5,7 @@ import Library from '../screens/library/library.screen';
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <Layout>
         <Switch>
           <Route component={Library} path="/library" />
