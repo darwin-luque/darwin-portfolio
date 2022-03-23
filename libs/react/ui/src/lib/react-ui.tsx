@@ -1,9 +1,12 @@
 import styles from './react-ui.module.css';
 
+// COMPONENTS
 export * from './carousel/carousel';
 export * from './card/card';
 export * from './drawer/drawer';
 export * from './menu-toggle/menu-toggle';
+// ICONS
+export * from './assets/icons/animated-burger-x.icon';
 
 /* eslint-disable-next-line */
 export interface ReactUiProps {}

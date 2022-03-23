@@ -1,4 +1,4 @@
-import AnimatedBurgerXIcon from '../../assets/icons/animated-burger-x.icon';
+import AnimatedBurgerXIcon from '../assets/icons/animated-burger-x.icon';
 import classes from './menu-toggle.module.css';
 
 interface MenuToggleProps {
