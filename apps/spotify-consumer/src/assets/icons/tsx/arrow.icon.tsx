@@ -1,5 +1,11 @@
-const ArrowIcon = ({ width = 24, color='#eee', length=15 }) => (
+const ArrowIcon = ({
+  width = 24,
+  color = '#eee',
+  length = 15,
+  className = '',
+}) => (
   <svg
+    className={className}
     viewBox="0 0 24 24"
     width={width}
     role="presentation"

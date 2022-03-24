@@ -1,0 +1,19 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 90%;
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  transform: rotate(180deg);
+  display: inline;
+  width: fit-content;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}

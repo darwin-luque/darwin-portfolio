@@ -7,8 +7,11 @@ interface InitialOptionsProps {
   show: boolean;
 }
 
-const InitialOptions = ({ onChoose, show }: InitialOptionsProps) => (
-  <BaseStep show={show} className={classes['container']}>
+const InitialOptions = ({
+  onChoose,
+  show,
+}: InitialOptionsProps) => (
+  <BaseStep show={show}>
     <div className={classes['content']}>
       <h1 className={classes['title']}>Export to My Spotify</h1>
       <p className={classes['description']}>What do you want to do?</p>
