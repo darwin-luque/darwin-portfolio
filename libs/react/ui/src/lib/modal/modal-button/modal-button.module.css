@@ -1,0 +1,18 @@
+.close-button {
+  width: auto;
+  outline: none;
+  -webkit-appearance: none;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 1.25px;
+  cursor: default;
+  font-family: inherit;
+  padding: 0 2rem;
+  height: 2.5rem;
+  margin: 2rem auto 1rem 0;
+  background: #101111;
+  color: #ffaa00;
+  border-radius: 4px;
+  transition: background ease 400ms;
+  box-shadow: 1px 1px 15px #03030399;
+}

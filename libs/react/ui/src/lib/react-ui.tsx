@@ -5,6 +5,7 @@ export * from './carousel/carousel';
 export * from './card/card';
 export * from './drawer/drawer';
 export * from './menu-toggle/menu-toggle';
+export * from './modal/modal';
 // ICONS
 export * from './assets/icons/animated-burger-x.icon';
 

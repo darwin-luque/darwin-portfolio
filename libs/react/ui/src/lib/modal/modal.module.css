@@ -1,0 +1,15 @@
+.modal {
+  width: fit-content;
+  height: fit-content;
+
+  margin: auto;
+  padding: 0 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orange-gradient {
+  background: linear-gradient(10deg, #ffaa00, #ff6a00);
+}
