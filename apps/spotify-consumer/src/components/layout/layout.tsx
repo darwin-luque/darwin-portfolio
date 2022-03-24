@@ -10,6 +10,8 @@ import {
 } from '../../store/actions/auth.action';
 import { SpotifyAuthResponse } from '../../types';
 import classes from './layout.module.css';
+import { useCycle } from 'framer-motion';
+import ExportModal from '../export-modal/export-modal';
 
 export interface LayoutProps {
   children: ReactNode;
@@ -17,6 +19,7 @@ export interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const dispatch = useAppDispatch();
+  const [showExportModal, toggleShowExportModal] = useCycle(false, true);
   const { user, tokens } = useAppSelector((state) => state.auth);
   const location = useLocation();
 
@@ -26,7 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
     if (!tokens?.spotify && spotifyQuery['code']) {
       dispatch(
         signInSpotifyAction(
-          // The SpotifyCredentials is based on the query of the api
+          // The SpotifyAuthResponse is based on the query of the api
           spotifyQuery as unknown as SpotifyAuthResponse,
           !tokens?.firebase
         )
@@ -40,17 +43,19 @@ const Layout = ({ children }: LayoutProps) => {
     let intervalId: NodeJS.Timer;
     if (tokens.firebase && tokens.spotify) {
       intervalId = setInterval(() => {
-        dispatch(refreshTokenAction(tokens)); 
+        dispatch(refreshTokenAction(tokens));
       }, tokens.spotify.expires_in * 999);
     }
 
     return () => clearTimeout(intervalId);
   }, [dispatch, tokens]);
 
+  console.log({ showExportModal });
   return (
     <div className={classes['layout']}>
+      <ExportModal show={showExportModal} onClose={toggleShowExportModal} />
       <div className={classes['navbar']}>
-        <Navbar />
+        <Navbar onExportToLibrary={toggleShowExportModal} />
       </div>
       <div className={classes['app']}>{children}</div>
     </div>

@@ -1,0 +1,50 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 90%;
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  height: 35%;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.2em;
+  margin: 1rem auto;
+  color: var(--color-4);
+  text-align: center;
+}
+
+.description,
+.button {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2em;
+  margin: 1rem auto;
+  color: var(--color-4);
+  text-align: center;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.button {
+  font-size: 1.8rem;
+  outline: none;
+  border: 2px solid var(--color-4);
+  border-radius: 1em;
+  background-color: transparent;
+  padding: 15% 2rem;
+}

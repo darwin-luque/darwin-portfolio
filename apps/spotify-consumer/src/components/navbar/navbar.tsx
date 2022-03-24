@@ -11,13 +11,14 @@ import MobileNavbar from './mobile-navbar/mobile-navbar';
 import classes from './navbar.module.css';
 
 export interface NavbarProps {
+  onExportToLibrary?: () => void;
   /**
    * For testing purpose only!
    */
-  staticWidth?: number
+  staticWidth?: number;
 }
 
-const Navbar = ({ staticWidth }: NavbarProps) => {
+const Navbar = ({ staticWidth, onExportToLibrary = () => null }: NavbarProps) => {
   const [searchValue, setSearchValue] = useState('');
   const { user, tokens } = useAppSelector((state) => state.auth);
   const location = useLocation();
@@ -56,14 +57,12 @@ const Navbar = ({ staticWidth }: NavbarProps) => {
     }
   };
 
-  const exportLibraryHandler = () => {};
-
   const ResponsiveNavbar = isMobile ? MobileNavbar : DesktopNavbar;
 
   return (
     <span className={classes['navbar']} data-testid="navbar">
       <ResponsiveNavbar
-        onExportLibrary={exportLibraryHandler}
+        onExportLibrary={onExportToLibrary}
         setSearchValue={setSearchValue}
         pathname={location.pathname}
         onSignOut={signOutHandler}

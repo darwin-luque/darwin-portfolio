@@ -1,0 +1,26 @@
+.modal {
+  position: relative;
+  width: 60vw;
+  height: 80vh;
+  min-width: 300px;
+  max-width: 1000px;
+  background-color: var(--color-2);
+}
+
+@media only screen and (max-width: 1000px) {
+  .modal {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .modal {
+    width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 50px) {
+  .modal {
+    width: 90vw;
+  }
+}
