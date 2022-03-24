@@ -26,6 +26,7 @@ export interface DesktopNavbarProps {
   searchValue: string;
   onSignIn: () => void;
   onSignOut: () => void;
+  onExportLibrary: () => void;
   setSearchValue: (value: string) => void;
 }
 
@@ -37,6 +38,7 @@ const DesktopNavbar = ({
   onSignOut,
   searchValue,
   setSearchValue,
+  onExportLibrary,
 }: DesktopNavbarProps) => {
   const [showSearchBar, setShowSearchBar] = useCycle(false, true);
 
@@ -63,6 +65,17 @@ const DesktopNavbar = ({
             onToggleBar={setShowSearchBar}
             onInputChange={setSearchValue}
           />
+        )}
+
+        {pathname === '/library' && !!tokens.spotify && !!tokens.firebase && (
+          <motion.button
+            className={classes['export']}
+            onClick={onExportLibrary}
+            whileHover={{ cursor: 'pointer', scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Export to My Spotify
+          </motion.button>
         )}
         {!!user && (
           <motion.button

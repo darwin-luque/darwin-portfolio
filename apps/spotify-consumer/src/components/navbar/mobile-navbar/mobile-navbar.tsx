@@ -11,33 +11,41 @@ interface MobileNavbarInterface {
   searchValue: string;
   onSignIn: () => void;
   onSignOut: () => void;
+  onExportLibrary: () => void;
   setSearchValue: (value: string) => void;
 }
 
 const MobileNavbar = ({
   user,
   tokens,
+  pathname,
   onSignIn,
   onSignOut,
   searchValue,
   setSearchValue,
+  onExportLibrary,
 }: MobileNavbarInterface) => {
   const [showSearchBar, setShowSearchBar] = useCycle(false, true);
 
   return (
     <div className={classes['mobile-navbar']} data-testid="mobile-navbar">
       <Sidebar
+        onExportLibrary={onExportLibrary}
         onSignIn={onSignIn}
         onSignOut={onSignOut}
         user={user}
         tokens={tokens}
       />
-      <SearchBar
-        showBar={showSearchBar}
-        onToggleBar={setShowSearchBar}
-        inputValue={searchValue}
-        onInputChange={setSearchValue}
-      />
+      {pathname !== '/library' ? (
+        <SearchBar
+          showBar={showSearchBar}
+          onToggleBar={setShowSearchBar}
+          inputValue={searchValue}
+          onInputChange={setSearchValue}
+        />
+      ) : (
+        <h1> My Library</h1>
+      )}
     </div>
   );
 };

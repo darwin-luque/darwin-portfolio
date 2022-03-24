@@ -11,6 +11,7 @@ interface SidebarProps {
   tokens?: Tokens;
   onSignIn: () => void;
   onSignOut: () => void;
+  onExportLibrary: () => void;
 }
 
 const elements = [
@@ -18,7 +19,13 @@ const elements = [
   { id: 1, name: 'Library', to: '/library' },
 ];
 
-const Sidebar = ({ user, tokens, onSignIn, onSignOut }: SidebarProps) => {
+const Sidebar = ({
+  user,
+  tokens,
+  onSignIn,
+  onSignOut,
+  onExportLibrary,
+}: SidebarProps) => {
   const [showSidebar, toggleShowSidebar] = useCycle(false, true);
   const history = useHistory();
 
@@ -45,6 +52,14 @@ const Sidebar = ({ user, tokens, onSignIn, onSignOut }: SidebarProps) => {
             onElementClick={() => history.push(to)}
           />
         ))}
+        {!!tokens?.spotify && !!tokens?.firebase && (
+          <SidebarElement
+            name="Export to My Spotify"
+            onElementClick={onExportLibrary}
+            shouldAddEffectOnMouseActivity
+            onToggleSidebar={toggleShowSidebar}
+          />
+        )}
         {!!tokens?.spotify && !!tokens?.firebase && (
           <SidebarElement
             name="Sign Out"

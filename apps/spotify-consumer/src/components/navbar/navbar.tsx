@@ -56,11 +56,14 @@ const Navbar = ({ staticWidth }: NavbarProps) => {
     }
   };
 
+  const exportLibraryHandler = () => {};
+
   const ResponsiveNavbar = isMobile ? MobileNavbar : DesktopNavbar;
 
   return (
     <span className={classes['navbar']} data-testid="navbar">
       <ResponsiveNavbar
+        onExportLibrary={exportLibraryHandler}
         setSearchValue={setSearchValue}
         pathname={location.pathname}
         onSignOut={signOutHandler}
