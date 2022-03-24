@@ -1,20 +1,6 @@
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import BaseStep from '../base-step/base-step';
 import classes from './initial-options.module.css';
-
-const variants: Variants = {
-  open: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  close: {
-    opacity: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
 
 interface InitialOptionsProps {
   onChoose: (option: 'create' | 'add') => void;
@@ -22,11 +8,7 @@ interface InitialOptionsProps {
 }
 
 const InitialOptions = ({ onChoose, show }: InitialOptionsProps) => (
-  <motion.div
-    variants={variants}
-    animate={show ? 'open' : 'close'}
-    className={classes['container']}
-  >
+  <BaseStep show={show} className={classes['container']}>
     <div className={classes['content']}>
       <h1 className={classes['title']}>Export to My Spotify</h1>
       <p className={classes['description']}>What do you want to do?</p>
@@ -49,7 +31,7 @@ const InitialOptions = ({ onChoose, show }: InitialOptionsProps) => (
         Add to Playlist
       </motion.button>
     </div>
-  </motion.div>
+  </BaseStep>
 );
 
 export default InitialOptions;

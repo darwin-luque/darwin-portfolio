@@ -5,8 +5,8 @@ import { Country } from './countries';
 export * from './countries';
 
 export type ExcludeMatchingProperties<T, V> = Pick<
-T,
-{ [K in keyof T]-?: T[K] extends V ? never : K }[keyof T]
+  T,
+  { [K in keyof T]-?: T[K] extends V ? never : K }[keyof T]
 >;
 
 export interface Notification {
@@ -37,7 +37,7 @@ export interface SpotifyImage {
   url: string;
 }
 
-export type SpotifyType = 'album' | 'artist' | 'track';
+export type SpotifyType = 'album' | 'artist' | 'track' | 'playlist';
 
 export type AlbumType = 'album' | 'single';
 
@@ -105,14 +105,36 @@ export interface Track {
   explicit: number;
   external_urls: {
     spotify: string;
-  }
+  };
   href: string;
   id: string;
   is_local: boolean;
   name: string;
   preview_url: string;
   track_number: string;
-  type: SpotifyType
+  type: SpotifyType;
+  uri: string;
+}
+
+export interface Playlist {
+  collaborative: boolean;
+  description: string;
+  external_urls: {
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  images: SpotifyImage[];
+  name: string;
+  owner: User;
+  primary_color?: string;
+  public: boolean;
+  snapshot_id: string;
+  tracks: {
+    href: string;
+    total: number;
+  };
+  type: SpotifyType;
   uri: string;
 }
 
@@ -125,7 +147,7 @@ export interface NewReleaseResponse {
     offset: number;
     previous: string | null;
     total: number;
-  }
+  };
 }
 
 export interface QueryTracksResponse {
@@ -137,15 +159,15 @@ export interface QueryTracksResponse {
     offset: number;
     previous: string | null;
     total: number;
-  }
+  };
 }
 
 export interface TracksOfAlbum {
   href: string;
   items: Track[];
   limit: number;
-  next: string | null
-  offset: number
+  next: string | null;
+  offset: number;
   previous: string | null;
   total: number;
 }
@@ -196,7 +218,7 @@ export interface LibraryState {
   loading: {
     update: boolean;
     get: boolean;
-  }
+  };
   tracks: Track[];
   error?: Error | string;
 }

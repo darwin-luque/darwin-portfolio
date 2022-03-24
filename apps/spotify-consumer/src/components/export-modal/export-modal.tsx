@@ -10,8 +10,8 @@ interface ExportModalProps {
 
 const ExportModal = ({ show, onClose }: ExportModalProps) => {
   const [step, toggleStep] = useCycle(0, 1, 2);
-  const chooseInitialOption = (option: 'add' | 'create') => {
-    console.log(option);
+  const chooseInitialOption = (option: 'create' | 'add') => {
+    toggleStep(option === 'create' ? 1 : 2);
   };
   return (
   <Modal onClose={onClose} show={show}>
