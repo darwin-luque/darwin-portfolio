@@ -1,6 +1,7 @@
 import { Modal } from '@darwin-portfolio/react/ui';
 import { useCycle } from 'framer-motion';
 import ChoosePlaylist from './choose-playlist/choose-playlist';
+import CreatePlaylist from './create-playlist/create-playlist';
 import classes from './export-modal.module.css';
 import InitialOptions from './initial-options/initial-options';
 
@@ -22,11 +23,16 @@ const ExportModal = ({ show, onClose }: ExportModalProps) => {
       <div className={classes['modal']}>
         <InitialOptions
           onChoose={(option: 'create' | 'add') =>
-            toggleStep(option === 'add' ? 1 : 2)
+            toggleStep(option === 'create' ? 1 : 2)
           }
           show={step === 0}
         />
-        <ChoosePlaylist onBackward={() => toggleStep(0)} show={step === 1} />
+        <CreatePlaylist show={step === 1} onBackward={() => toggleStep(0)} />
+        <ChoosePlaylist
+          onFallback={() => toggleStep(1)}
+          onBackward={() => toggleStep(0)}
+          show={step === 2}
+        />
       </div>
     </Modal>
   );

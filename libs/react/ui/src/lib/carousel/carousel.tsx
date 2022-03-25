@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { memo, useState } from 'react';
 import classes from './carousel.module.css';
 import Item from './item/item';

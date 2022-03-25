@@ -1,4 +1,5 @@
-.title {
+.title,
+.fallback {
   font-weight: 600;
   font-size: 2rem;
   line-height: 1.2em;
@@ -10,7 +11,7 @@
 .playlists {
   list-style: none;
   padding: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: center;
 }
 
@@ -19,4 +20,12 @@
   margin: 1rem auto;
   border: 1px solid var(--color-4);
   border-radius: 35%;
+}
+
+.fallback {
+  background-color: transparent;
+  font-size: 1.5rem;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  border: 1px solid var(--color-4);
 }
