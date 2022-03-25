@@ -1,11 +1,16 @@
-import axios, { AxiosResponse } from 'axios';
-import BaseStep from '../base-step/base-step';
-import PlaylistItem from './playlist-item/playlist-item';
-import classes from './choose-playlist.module.css';
-import { Fragment, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../hooks/redux-hooks';
-import { GetPlaylistsResponse, Playlist } from '../../../types';
 import { motion } from 'framer-motion';
+import { Fragment, useEffect, useState } from 'react';
+import PlaylistItem from './playlist-item/playlist-item';
+import BaseStep from '../base-step/base-step';
+import { SpotifyService } from '../../../services/spotify.service';
+import { useAppSelector } from '../../../hooks/redux-hooks';
+import { Playlist } from '../../../types';
+import classes from './choose-playlist.module.css';
+
+const spotifyService = new SpotifyService(
+  process.env['NX_API_ENDPOINT'] ?? '',
+  process.env['NX_AUTH_ENDPOINT'] ?? ''
+);
 
 interface ChoosePlaylistProps {
   show: boolean;
@@ -23,20 +28,9 @@ const ChoosePlaylist = ({
 
   useEffect(() => {
     if (user && tokens.spotify) {
-      axios({
-        url: `${process.env['NX_API_ENDPOINT']}/users/${user.id}/playlists`,
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${tokens.spotify.access_token}`,
-        },
-        params: {
-          limit: 20,
-        },
-      }).then((res: AxiosResponse<GetPlaylistsResponse>) => {
-        setPlaylists(res.data.playlists.items);
-      });
+      spotifyService.getPlaylists(tokens, user).then(setPlaylists);
     }
-  }, [tokens.spotify, user]);
+  }, [tokens, user]);
 
   return (
     <BaseStep onBackward={onBackward} show={show}>

@@ -6,11 +6,13 @@ import {
   NewReleaseResponse,
   QueryTracksResponse,
   SpotifyAuthResponse,
+  GetPlaylistsResponse,
   SpotifyCredentials,
   Tokens,
   Track,
   TracksOfAlbum,
   User,
+  Playlist,
 } from '../types';
 import { trasnforToURLEncodedForm } from '../utils';
 
@@ -131,5 +133,20 @@ export class SpotifyService {
     );
 
     return tracks.data.tracks.items;
+  }
+
+  async getPlaylists(tokens: Tokens, user: User): Promise<Playlist[]> {
+    const res: AxiosResponse<GetPlaylistsResponse> = await axios({
+      url: `${process.env['NX_API_ENDPOINT']}/users/${user.id}/playlists`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${tokens.spotify?.access_token}`,
+      },
+      params: {
+        limit: 20,
+      },
+    });
+
+    return res.data.playlists.items;
   }
 }

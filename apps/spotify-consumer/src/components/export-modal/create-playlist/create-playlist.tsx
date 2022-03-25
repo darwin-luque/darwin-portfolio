@@ -11,6 +11,7 @@ const CreatePlaylist = ({ show, onBackward }: CreatePlaylistProps) => {
   const nameRef = createRef<HTMLInputElement>();
   const descriptionRef = createRef<HTMLTextAreaElement>();
   const publicRef = createRef<HTMLInputElement>();
+
   const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     console.log({
@@ -19,6 +20,7 @@ const CreatePlaylist = ({ show, onBackward }: CreatePlaylistProps) => {
       public: publicRef.current?.checked,
     });
   };
+
   return (
     <BaseStep show={show} onBackward={onBackward}>
       <div className={classes['content']}>
