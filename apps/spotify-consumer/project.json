@@ -17,6 +17,7 @@
         "tsConfig": "apps/spotify-consumer/tsconfig.app.json",
         "assets": [
           "apps/spotify-consumer/src/favicon.ico",
+          "apps/spotify-consumer/src/favicons",
           "apps/spotify-consumer/src/assets"
         ],
         "styles": ["apps/spotify-consumer/src/styles.css"],
