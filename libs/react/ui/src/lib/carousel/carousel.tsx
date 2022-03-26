@@ -2,9 +2,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { memo, useState } from 'react';
 import classes from './carousel.module.css';
 import Item from './item/item';
+import LoadingBox from './loading-box/loading-box';
+
+export * from './loading-box/loading-box';
 
 interface CarouselProps<T> {
   data: T[];
+  loading?: boolean;
   perPage: number;
   itemMinWidth?: number;
   ElementTemplate: (props: T) => JSX.Element;
@@ -12,6 +16,7 @@ interface CarouselProps<T> {
 
 export const Carousel = <T extends { id: number | string }>({
   data,
+  loading,
   perPage,
   itemMinWidth,
   ElementTemplate,
@@ -35,15 +40,21 @@ export const Carousel = <T extends { id: number | string }>({
 
   return (
     <div className={classes['container']} data-testid="carousel">
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.div className={classes['items']}>
-          {[...data].splice(page, itemsPerPage).map((val) => (
-            <Item direction={direction} key={val.id} minWidth={itemMinWidth}>
-              <ElementTemplate {...val} />
-            </Item>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      {loading ? (
+        Array(itemsPerPage)
+          .fill(null)
+          .map((val, i) => <LoadingBox key={i} width={itemMinWidth} />)
+      ) : (
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div className={classes['items']}>
+            {[...data].splice(page, itemsPerPage).map((val) => (
+              <Item direction={direction} key={val.id} minWidth={itemMinWidth}>
+                <ElementTemplate {...val} />
+              </Item>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      )}
       <button
         data-testid="next-button"
         type="button"
