@@ -23,6 +23,19 @@ export class SpotifyService {
     private readonly authUrl?: string
   ) {}
 
+  private appendExpiresDateToCredentials(
+    creds: SpotifyCredentials
+  ): SpotifyCredentials {
+    const timePlusExpire = new Date().getTime() + creds.expires_in * 1000;
+    const expiresDate = new Date(timePlusExpire);
+
+    Object.assign<SpotifyCredentials, Partial<SpotifyCredentials>>(creds, {
+      expires_date: expiresDate,
+    });
+
+    return creds;
+  }
+
   async signIn(authData: SpotifyAuthResponse): Promise<SpotifyCredentials> {
     const token: AxiosResponse<SpotifyCredentials> = await axios.post(
       `${this.authUrl}/api/token`,
@@ -45,7 +58,7 @@ export class SpotifyService {
       }
     );
 
-    return token.data;
+    return this.appendExpiresDateToCredentials(token.data);
   }
 
   async userProfile(creds: SpotifyCredentials): Promise<User> {
@@ -82,7 +95,7 @@ export class SpotifyService {
       }
     );
 
-    return { ...token, ...newToken.data };
+    return this.appendExpiresDateToCredentials({ ...token, ...newToken.data });
   }
 
   async getNewReleaseAlbums(

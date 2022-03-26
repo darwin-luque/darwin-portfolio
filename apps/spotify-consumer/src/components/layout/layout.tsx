@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { ReactNode, useEffect } from 'react';
+import moment from 'moment';
 import queryString from 'query-string';
 import Navbar from '../navbar/navbar';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
@@ -40,11 +41,20 @@ const Layout = ({ children }: LayoutProps) => {
   }, [location, tokens, user, dispatch]);
 
   useEffect(() => {
+    const FIFTEEN_MINS = 15 * 60 * 1000;
+    const refreshTokenCallback = () => {
+      // Check if the token still has 15 mins
+      if (moment(tokens.spotify?.expires_date).diff(moment()) <= FIFTEEN_MINS) {
+        refreshTokenAction(tokens);
+      }
+    };
     let intervalId: NodeJS.Timer;
     if (tokens.firebase && tokens.spotify) {
+      // Run every 15 mins once tokens are appended
+      refreshTokenCallback();
       intervalId = setInterval(() => {
-        dispatch(refreshTokenAction(tokens));
-      }, tokens.spotify.expires_in * 999);
+        refreshTokenCallback();
+      }, FIFTEEN_MINS);
     }
 
     return () => clearTimeout(intervalId);
