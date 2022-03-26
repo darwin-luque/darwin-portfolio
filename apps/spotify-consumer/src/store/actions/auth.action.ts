@@ -111,20 +111,22 @@ export const refreshTokenAction = Object.assign(
     async (dispatch: ThunkDispatch<RootState, unknown, AuthAction>) => {
       dispatch(refreshTokenAction.start());
       try {
+        console.log('refreshTokenAction');
         if (!tokens.spotify || !tokens.firebase) {
           throw new Error('No spotify and/or firebase session');
         }
         const spotifyToken = await spotifyService.refreshToken(tokens.spotify);
-        const firebaseToken = await firebaseService.refreshToken(
-          tokens.firebase
-        );
+        // const firebaseToken = await firebaseService.refreshToken(
+        //   tokens.firebase
+        // );
         dispatch(
           refreshTokenAction.success({
             spotify: spotifyToken,
-            firebase: firebaseToken,
+            // firebase: firebaseToken,
           })
         );
       } catch (error) {
+        console.log(error);
         dispatch(refreshTokenAction.fail(error as Error));
       }
     },

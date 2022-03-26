@@ -45,7 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
     const refreshTokenCallback = () => {
       // Check if the token still has 15 mins
       if (moment(tokens.spotify?.expires_date).diff(moment()) <= FIFTEEN_MINS) {
-        refreshTokenAction(tokens);
+        dispatch(refreshTokenAction(tokens));
       }
     };
     let intervalId: NodeJS.Timer;
