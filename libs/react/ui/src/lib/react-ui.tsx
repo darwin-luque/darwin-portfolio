@@ -7,6 +7,7 @@ export * from './drawer/drawer';
 export * from './menu-toggle/menu-toggle';
 export * from './modal/modal';
 export * from './backdrop/backdrop';
+export * from './loader/loader';
 // ICONS
 export * from './assets/icons/animated-burger-x.icon';
 

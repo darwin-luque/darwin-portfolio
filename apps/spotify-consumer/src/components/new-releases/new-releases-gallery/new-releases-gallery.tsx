@@ -9,7 +9,7 @@ import { Country, GeolocationResponse } from '../../../types';
 
 const NewReleasesGallery = () => {
   const { tokens } = useAppSelector((state) => state.auth);
-  const { newReleases } = useAppSelector((state) => state.music);
+  const { newReleases, loading } = useAppSelector((state) => state.music);
   const [countryCode, setCountryCode] = useState<Country>();
   const [gettingLocation, setGettingLocation] = useState<boolean>(true);
   const dispatch = useAppDispatch();
@@ -67,6 +67,7 @@ const NewReleasesGallery = () => {
 
   return (
     <Carousel
+      loading={loading.newRelease}
       data={newReleases}
       perPage={perPage}
       ElementTemplate={TrackCard}
