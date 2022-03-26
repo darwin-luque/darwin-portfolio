@@ -21,6 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
   const dispatch = useAppDispatch();
   const [showExportModal, toggleShowExportModal] = useCycle(false, true);
   const { user, tokens } = useAppSelector((state) => state.auth);
+  const { tracks } = useAppSelector((state) => state.library);
   const location = useLocation();
 
   useEffect(() => {
@@ -53,7 +54,13 @@ const Layout = ({ children }: LayoutProps) => {
   console.log({ showExportModal });
   return (
     <div className={classes['layout']}>
-      <ExportModal show={showExportModal} onClose={toggleShowExportModal} />
+      <ExportModal
+        tokens={tokens}
+        user={user}
+        show={showExportModal}
+        onClose={toggleShowExportModal}
+        tracks={tracks}
+      />
       <div className={classes['navbar']}>
         <Navbar onExportToLibrary={toggleShowExportModal} />
       </div>

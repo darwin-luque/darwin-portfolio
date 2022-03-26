@@ -150,6 +150,12 @@ export interface NewReleaseResponse {
   };
 }
 
+export interface CreatePlaylistBody {
+  name: string;
+  description: string;
+  public: boolean;
+}
+
 export interface QueryTracksResponse {
   tracks: {
     href: string;
@@ -163,15 +169,13 @@ export interface QueryTracksResponse {
 }
 
 export interface GetPlaylistsResponse {
-  playlists: {
-    href: string;
-    items: Playlist[];
-    limit: number;
-    next: string | null;
-    offset: number;
-    previous: string | null;
-    total: number;
-  };
+  href: string;
+  items: Playlist[];
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
 }
 
 export interface TracksOfAlbum {

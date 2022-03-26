@@ -1,24 +1,46 @@
 import { FormEventHandler, createRef } from 'react';
+import { SpotifyService } from '../../../services/spotify.service';
+import { Tokens, Track, User } from '../../../types';
 import BaseStep from '../base-step/base-step';
 import classes from './create-playlist.module.css';
 
+const spotifyService = new SpotifyService(
+  process.env['NX_API_ENDPOINT'] ?? '',
+  process.env['NX_AUTH_ENDPOINT'] ?? ''
+);
+
 interface CreatePlaylistProps {
   show: boolean;
+  tracks: Track[];
+  tokens: Tokens;
+  user?: User;
   onBackward: () => void;
+  onCreateFinish: () => void;
 }
 
-const CreatePlaylist = ({ show, onBackward }: CreatePlaylistProps) => {
+const CreatePlaylist = ({
+  show,
+  user,
+  tracks,
+  tokens,
+  onBackward,
+  onCreateFinish,
+}: CreatePlaylistProps) => {
   const nameRef = createRef<HTMLInputElement>();
   const descriptionRef = createRef<HTMLTextAreaElement>();
   const publicRef = createRef<HTMLInputElement>();
 
-  const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {
+  const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    console.log({
-      name: nameRef.current?.value,
-      description: descriptionRef.current?.value,
-      public: publicRef.current?.checked,
-    });
+    if (!user) return;
+    const data = {
+      name: nameRef.current?.value ?? 'My Playlist',
+      description: descriptionRef.current?.value ?? '',
+      public: publicRef.current?.checked ?? false,
+    };
+
+    await spotifyService.createPlaylistWithTracks(tokens, user, data, tracks);
+    onCreateFinish();
   };
 
   return (
