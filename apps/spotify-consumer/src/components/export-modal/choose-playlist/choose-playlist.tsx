@@ -16,14 +16,17 @@ interface ChoosePlaylistProps {
   show: boolean;
   onBackward: () => void;
   onFallback: () => void;
+  onFinishUpdate: () => void;
 }
 
 const ChoosePlaylist = ({
   show,
   onBackward,
   onFallback,
+  onFinishUpdate
 }: ChoosePlaylistProps) => {
   const { tokens, user } = useAppSelector((state) => state.auth);
+  const { tracks } = useAppSelector((state) => state.library);
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
@@ -31,6 +34,11 @@ const ChoosePlaylist = ({
       spotifyService.getPlaylists(tokens, user).then(setPlaylists);
     }
   }, [tokens, user]);
+
+  const updatePlaylistHandler = async (playlist: Playlist) => {
+    await spotifyService.updatePlaylist(tokens, playlist, tracks);
+    onFinishUpdate();
+  };
 
   return (
     <BaseStep onBackward={onBackward} show={show}>
@@ -50,12 +58,12 @@ const ChoosePlaylist = ({
             Try creating one!
           </motion.button>
         )}
-        {playlists.map(({ id, name, images }, i) => (
-          <Fragment key={id}>
+        {playlists.map((playlist, i) => (
+          <Fragment key={playlist.id}>
             <PlaylistItem
-              name={name}
-              imageSrc={images[0].url}
-              onClick={() => console.log(id)}
+              name={playlist.name}
+              imageSrc={playlist.images[0]?.url}
+              onClick={() => updatePlaylistHandler(playlist)}
             />
             {i + 1 < playlists.length && <hr className={classes['line']} />}
           </Fragment>

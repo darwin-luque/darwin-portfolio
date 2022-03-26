@@ -7,6 +7,7 @@ import {
   QueryTracksResponse,
   SpotifyAuthResponse,
   GetPlaylistsResponse,
+  CreatePlaylistBody,
   SpotifyCredentials,
   Tokens,
   Track,
@@ -137,7 +138,7 @@ export class SpotifyService {
 
   async getPlaylists(tokens: Tokens, user: User): Promise<Playlist[]> {
     const res: AxiosResponse<GetPlaylistsResponse> = await axios({
-      url: `${process.env['NX_API_ENDPOINT']}/users/${user.id}/playlists`,
+      url: `${this.apiUrl}/users/${user.id}/playlists`,
       method: 'GET',
       headers: {
         Authorization: `Bearer ${tokens.spotify?.access_token}`,
@@ -147,6 +148,54 @@ export class SpotifyService {
       },
     });
 
-    return res.data.playlists.items;
+    return res.data.items;
+  }
+
+  async createPlaylist(
+    tokens: Tokens,
+    user: User,
+    data: CreatePlaylistBody
+  ): Promise<Playlist> {
+    const res: AxiosResponse<Playlist> = await axios({
+      url: `${this.apiUrl}/users/${user.id}/playlists`,
+      method: 'POST',
+      data,
+      headers: {
+        Authorization: `Bearer ${tokens.spotify?.access_token}`,
+      },
+    });
+
+    return res.data;
+  }
+
+  async updatePlaylist(
+    tokens: Tokens,
+    playlist: Playlist,
+    tracks: Track[]
+  ): Promise<{ snapshot_id: string }> {
+    const res: AxiosResponse<{ snapshot_id: string }> = await axios({
+      url: `${this.apiUrl}/playlists/${playlist.id}/tracks`,
+      method: 'POST',
+      data: {
+        uris: tracks.map(({ uri }) => uri),
+      },
+      headers: {
+        Authorization: `Bearer ${tokens.spotify?.access_token}`,
+      },
+    });
+
+    return res.data;
+  }
+
+  async createPlaylistWithTracks(
+    tokens: Tokens,
+    user: User,
+    data: CreatePlaylistBody,
+    tracks: Track[]
+  ): Promise<Playlist> {
+    const playlist = await this.createPlaylist(tokens, user, data);
+    await this.updatePlaylist(tokens, playlist, tracks);
+
+    return playlist;
   }
 }

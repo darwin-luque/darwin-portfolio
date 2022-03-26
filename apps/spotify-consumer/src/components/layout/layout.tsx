@@ -21,7 +21,6 @@ const Layout = ({ children }: LayoutProps) => {
   const dispatch = useAppDispatch();
   const [showExportModal, toggleShowExportModal] = useCycle(false, true);
   const { user, tokens } = useAppSelector((state) => state.auth);
-  const { tracks } = useAppSelector((state) => state.library);
   const location = useLocation();
 
   useEffect(() => {
@@ -51,16 +50,9 @@ const Layout = ({ children }: LayoutProps) => {
     return () => clearTimeout(intervalId);
   }, [dispatch, tokens]);
 
-  console.log({ showExportModal });
   return (
     <div className={classes['layout']}>
-      <ExportModal
-        tokens={tokens}
-        user={user}
-        show={showExportModal}
-        onClose={toggleShowExportModal}
-        tracks={tracks}
-      />
+      <ExportModal show={showExportModal} onClose={toggleShowExportModal} />
       <div className={classes['navbar']}>
         <Navbar onExportToLibrary={toggleShowExportModal} />
       </div>

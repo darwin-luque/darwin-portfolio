@@ -1,6 +1,6 @@
 import { FormEventHandler, createRef } from 'react';
+import { useAppSelector } from '../../../hooks/redux-hooks';
 import { SpotifyService } from '../../../services/spotify.service';
-import { Tokens, Track, User } from '../../../types';
 import BaseStep from '../base-step/base-step';
 import classes from './create-playlist.module.css';
 
@@ -11,21 +11,17 @@ const spotifyService = new SpotifyService(
 
 interface CreatePlaylistProps {
   show: boolean;
-  tracks: Track[];
-  tokens: Tokens;
-  user?: User;
   onBackward: () => void;
   onCreateFinish: () => void;
 }
 
 const CreatePlaylist = ({
   show,
-  user,
-  tracks,
-  tokens,
   onBackward,
   onCreateFinish,
 }: CreatePlaylistProps) => {
+  const { tokens, user } = useAppSelector((state) => state.auth);
+  const { tracks } = useAppSelector((state) => state.library);
   const nameRef = createRef<HTMLInputElement>();
   const descriptionRef = createRef<HTMLTextAreaElement>();
   const publicRef = createRef<HTMLInputElement>();

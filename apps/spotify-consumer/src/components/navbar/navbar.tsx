@@ -18,7 +18,10 @@ export interface NavbarProps {
   staticWidth?: number;
 }
 
-const Navbar = ({ staticWidth, onExportToLibrary = () => null }: NavbarProps) => {
+const Navbar = ({
+  staticWidth,
+  onExportToLibrary = () => null,
+}: NavbarProps) => {
   const [searchValue, setSearchValue] = useState('');
   const { user, tokens } = useAppSelector((state) => state.auth);
   const location = useLocation();
@@ -29,10 +32,12 @@ const Navbar = ({ staticWidth, onExportToLibrary = () => null }: NavbarProps) =>
   const signInHandler = () => {
     const a = document.createElement('a');
     const state = generateRandomString(16);
-    a.href = `${process.env['NX_AUTH_ENDPOINT']}/authorize?${queryString.stringify({
+    a.href = `${
+      process.env['NX_AUTH_ENDPOINT']
+    }/authorize?${queryString.stringify({
       response_type: 'code',
       client_id: process.env['NX_CLIENT_ID'],
-      scope: 'user-read-private user-read-email',
+      scope: 'user-read-private user-read-email playlist-modify-private playlist-modify-public',
       redirect_uri: process.env['NX_REDIRECT_URI'],
       show_dialog: true,
       state,
