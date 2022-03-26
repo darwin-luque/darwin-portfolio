@@ -10,7 +10,7 @@ export interface SizeProps {
 }
 
 export interface LoaderProps extends SizeProps {
-  type: 'grid' | 'radar' | 'ring' | 'spinner' | 'spinning-dots' | 'three-dots';
+  type?: 'grid' | 'radar' | 'ring' | 'spinner' | 'spinning-dots' | 'three-dots';
 }
 
 export const Loader = ({ size, type }: LoaderProps) => {
