@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './components/auth/auth.module';
 
@@ -18,7 +19,7 @@ const configs = {
 };
 
 @Module({
-  imports: [AuthModule, TypeOrmModule.forRoot(configs)],
+  imports: [AuthModule, TypeOrmModule.forRoot(configs), CqrsModule],
   controllers: [],
   providers: [],
 })
