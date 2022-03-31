@@ -15,6 +15,8 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-socket.io": "^8.4.3",
+    "@nestjs/websockets": "^8.4.3",
     "@nrwl/cli": "13.8.4",
     "@nrwl/cypress": "13.8.4",
     "@nrwl/eslint-plugin-nx": "13.8.4",
