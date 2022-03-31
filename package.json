@@ -17,6 +17,7 @@
     "@nestjs/cqrs": "^8.0.3",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/platform-socket.io": "^8.4.3",
+    "@nestjs/typeorm": "^8.0.3",
     "@nestjs/websockets": "^8.4.3",
     "@nrwl/cli": "13.8.4",
     "@nrwl/cypress": "13.8.4",
@@ -42,6 +43,7 @@
     "moment": "^2.29.1",
     "motion": "^10.6.2",
     "motion-signals": "^0.0.3",
+    "pg": "^8.7.3",
     "query-string": "^7.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -54,7 +56,8 @@
     "regenerator-runtime": "0.13.7",
     "rxjs": "^7.0.0",
     "solid-app-router": "^0.3.0",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "typeorm": "^0.3.4"
   },
   "devDependencies": {
     "@nestjs/schematics": "^8.0.0",
