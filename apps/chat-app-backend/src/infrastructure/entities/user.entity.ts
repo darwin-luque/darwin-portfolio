@@ -1,5 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
+  AfterInsert,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -9,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserCreatedEvent } from '../../components/auth/events/impl/user-created.event';
 import { Chat } from './chat.entity';
 import { Message } from './message.entity';
 
@@ -38,7 +40,7 @@ export class User extends AggregateRoot {
   // Add messages typeorm one to many relation with message
   @OneToMany(() => Message, (message) => message.user)
   messages?: Message[];
-  
+
   // Add createdAt typeorm column
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -50,4 +52,9 @@ export class User extends AggregateRoot {
   // Add deletedAt typeorm column
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
+
+  @AfterInsert()
+  created() {
+    this.apply(new UserCreatedEvent(this));
+  }
 }
