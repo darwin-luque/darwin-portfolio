@@ -1,9 +1,11 @@
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
-import { CqrsModule } from '@nestjs/cqrs';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './components/auth/auth.module';
+import { Message } from './infrastructure/entities/message.entity';
+import { User } from './infrastructure/entities/user.entity';
+import { Chat } from './infrastructure/entities/chat.entity';
 
-const configs = {
+const configs: TypeOrmModuleOptions = {
   synchronize: process.env.NODE_ENV === 'development',
   type: 'postgres',
   host: process.env.TYPEORM_HOST,
@@ -11,15 +13,15 @@ const configs = {
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
   database: process.env.TYPEORM_DB_NAME,
-  entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/database/migrations/*{.ts,.js}'],
+  entities: [User, Chat, Message],
+  migrations: ['src/database/migrations/*{.ts,.js}'],
   cli: {
     migrationsDir: 'migrations',
   },
 };
 
 @Module({
-  imports: [AuthModule, TypeOrmModule.forRoot(configs), CqrsModule],
+  imports: [AuthModule, TypeOrmModule.forRoot(configs)],
   controllers: [],
   providers: [],
 })
