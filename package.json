@@ -12,6 +12,9 @@
   "private": true,
   "dependencies": {
     "@angular-devkit/schematics": "^13.3.0",
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/core": "^8.0.0",
+    "@nestjs/platform-express": "^8.0.0",
     "@nrwl/cli": "13.8.4",
     "@nrwl/cypress": "13.8.4",
     "@nrwl/eslint-plugin-nx": "13.8.4",
@@ -44,12 +47,18 @@
     "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
+    "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
+    "rxjs": "^7.0.0",
     "solid-app-router": "^0.3.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@nestjs/schematics": "^8.0.0",
+    "@nestjs/testing": "^8.0.0",
     "@nrwl/jest": "13.8.4",
+    "@nrwl/nest": "^13.9.5",
+    "@nrwl/node": "13.9.5",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",

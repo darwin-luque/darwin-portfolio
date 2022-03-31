@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "chat-app-backend": "apps/chat-app-backend",
     "react-hook": "libs/react/hooks",
     "react-ui": "libs/react/ui",
     "spotify-consumer": "apps/spotify-consumer",
