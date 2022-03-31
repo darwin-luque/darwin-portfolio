@@ -1,11 +1,18 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { BaseDateEntity } from '../../utils/shared/base-date.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Chat } from './chat.entity';
 import { User } from './user.entity';
 
 // Add a message entity that extends BaseDateEntity
 @Entity()
-export class Message extends BaseDateEntity {
+export class Message {
   // Add uuid v4 as primary key
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
@@ -21,4 +28,16 @@ export class Message extends BaseDateEntity {
   // Add message typeorm column
   @Column({ name: 'message' })
   message: string;
+
+  // Add createdAt typeorm column
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  // Add updatedAt typeorm column
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
+
+  // Add deletedAt typeorm column
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: Date;
 }

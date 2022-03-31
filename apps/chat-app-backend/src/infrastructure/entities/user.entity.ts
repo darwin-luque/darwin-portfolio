@@ -1,17 +1,20 @@
+import { AggregateRoot } from '@nestjs/cqrs';
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { BaseDateEntity } from '../../utils/shared/base-date.entity';
 import { Chat } from './chat.entity';
 import { Message } from './message.entity';
 
 // Create typeorm user entity
 @Entity()
-export class User extends BaseDateEntity {
+export class User extends AggregateRoot {
   // Add uuid v4 as primary key
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
@@ -35,4 +38,16 @@ export class User extends BaseDateEntity {
   // Add messages typeorm one to many relation with message
   @OneToMany(() => Message, (message) => message.user)
   messages?: Message[];
+  
+  // Add createdAt typeorm column
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  // Add updatedAt typeorm column
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
+
+  // Add deletedAt typeorm column
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: Date;
 }
