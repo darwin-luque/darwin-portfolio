@@ -1,4 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import { hash } from 'bcryptjs';
 import {
   AfterInsert,
   Column,
@@ -56,5 +57,11 @@ export class User extends AggregateRoot {
   @AfterInsert()
   created() {
     this.apply(new UserCreatedEvent(this));
+  }
+
+  // Add comparePassword method to compare password
+  async comparePassword(password: string): Promise<boolean> {
+    const hashedPassword = await hash(password, 12);
+    return this.password === hashedPassword;
   }
 }
