@@ -7,6 +7,7 @@ import { AuthController } from './auth.controller';
 import { EventHandlers } from './events/handlers';
 import { JwtModule } from '@nestjs/jwt';
 import { SetUserMiddleware } from '../../infrastructure/middlewares/set-user.middleware';
+import { QueryHandlers } from './queries/handlers';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { SetUserMiddleware } from '../../infrastructure/middlewares/set-user.mid
     }),
   ],
   controllers: [AuthController],
-  providers: [...CommandHandlers, ...EventHandlers],
+  providers: [...CommandHandlers, ...QueryHandlers, ...EventHandlers],
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {

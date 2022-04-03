@@ -1,15 +1,16 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CurrentUser } from '../../infrastructure/decorators/current-user.decorator';
 import { Serialize } from '../../infrastructure/decorators/serialize.decorator';
+import { AuthGuard } from '../../infrastructure/guards/auth.guard';
 import { User } from '../../infrastructure/entities/user.entity';
 import { GenerateTokenCommand } from './commands/impl/generate-token.command';
 import { SignUpCommand } from './commands/impl/sign-up.command';
+import { SignInQuery } from './queries/impl/sign-in.query';
+import { UserAndTokenDto } from './dtos/user-and-token';
 import { SignInDto } from './dtos/sign-in.dto';
 import { SignUpDto } from './dtos/sign-up.dto';
-import { UserAndTokenDto } from './dtos/user-and-token';
 import { UserDto } from './dtos/user.dto';
-import { SignInQuery } from './queries/impl/sign-in.query';
 
 interface UserAndToken {
   user: User;
@@ -49,6 +50,7 @@ export class AuthController {
 
   @Get('me')
   @Serialize(UserDto)
+  @UseGuards(AuthGuard)
   me(@CurrentUser() user: User): User {
     return user;
   }
