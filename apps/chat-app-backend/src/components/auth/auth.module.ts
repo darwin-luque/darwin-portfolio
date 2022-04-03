@@ -1,11 +1,12 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { User } from '../../infrastructure/entities/user.entity';
 import { CommandHandlers } from './commands/handler';
 import { AuthController } from './auth.controller';
 import { EventHandlers } from './events/handlers';
 import { JwtModule } from '@nestjs/jwt';
+import { SetUserMiddleware } from '../../infrastructure/middlewares/set-user.middleware';
 
 @Module({
   imports: [
@@ -19,4 +20,8 @@ import { JwtModule } from '@nestjs/jwt';
   controllers: [AuthController],
   providers: [...CommandHandlers, ...EventHandlers],
 })
-export class AuthModule {}
+export class AuthModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SetUserMiddleware).forRoutes('*');
+  }
+}

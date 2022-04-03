@@ -21,7 +21,11 @@ const configs: TypeOrmModuleOptions = {
 };
 
 @Module({
-  imports: [AuthModule, TypeOrmModule.forRoot(configs)],
+  imports: [
+    AuthModule,
+    TypeOrmModule.forRoot(configs),
+    TypeOrmModule.forFeature([User]),
+  ],
   controllers: [],
   providers: [],
 })
