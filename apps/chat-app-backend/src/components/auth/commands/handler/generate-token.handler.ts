@@ -10,13 +10,10 @@ export class GenerateTokenHandler
 {
   constructor(private jwtService: JwtService) {}
 
-  async execute(command: GenerateTokenCommand): Promise<string> {
+  execute(command: GenerateTokenCommand): Promise<string> {
     const payload = plainToClass(TokenPayloadDto, command.user, {
       excludeExtraneousValues: true,
     });
-    console.log(payload);
-    const token = await this.jwtService.signAsync({ ...payload });
-    console.log({ token });
-    return token;
+    return this.jwtService.signAsync({ ...payload });
   }
 }
