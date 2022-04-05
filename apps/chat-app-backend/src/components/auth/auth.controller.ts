@@ -15,6 +15,7 @@ import { Token } from '../../utils/types';
 import { RefreshTokenDto } from './dtos/refresh-token.dto';
 import { TokenDto } from './dtos/token.dto';
 import { RefreshTokenCommand } from './commands/impl/refresh-token.command';
+import { SignOutCommand } from './commands/impl/sign-out.command';
 
 interface UserAndToken {
   user: User;
@@ -60,6 +61,11 @@ export class AuthController {
     return this.commandBus.execute<RefreshTokenCommand, Token>(
       new RefreshTokenCommand(body.refreshToken)
     );
+  }
+
+  @Post('sign-out')
+  signout(@CurrentUser() user: User): Promise<void> {
+    return this.commandBus.execute(new SignOutCommand(user.id));
   }
 
   @Get('me')

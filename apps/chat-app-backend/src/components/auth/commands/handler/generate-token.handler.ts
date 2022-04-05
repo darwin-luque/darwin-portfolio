@@ -1,6 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { plainToClass } from 'class-transformer';
 import { JwtService } from '@nestjs/jwt';
+import * as moment from 'moment';
 import { TokenPayloadDto } from '../../dtos/token-payload.dto';
 import { GenerateTokenCommand } from '../impl/generate-token.command';
 import { Token } from '../../../../utils/types';
@@ -22,6 +23,23 @@ export class GenerateTokenHandler
     const payload = plainToClass(TokenPayloadDto, command.user, {
       excludeExtraneousValues: true,
     });
+
+    const user = await this.usersRepository.findOne({
+      where: { id: command.user.id },
+    });
+
+    if (!user) {
+      throw new Error(`User with id ${payload.id} not found`);
+    }
+
+    if (user.token?.expiresIn) {
+      const hasValidToken = moment(user.token.expiresIn).isAfter();
+
+      if (hasValidToken) {
+        return user.token;
+      }
+    }
+
     const accessToken = await this.jwtService.signAsync(
       { ...payload },
       { expiresIn: '1h' }

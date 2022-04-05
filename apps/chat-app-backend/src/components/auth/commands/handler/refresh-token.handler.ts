@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -27,6 +27,10 @@ export class RefreshTokenHandler
 
     if (!user) {
       throw new NotFoundException(`User with id ${payload.id} not found`);
+    }
+
+    if (!user.token) {
+      throw new ForbiddenException(`User with id ${payload.id} has no token`);
     }
 
     const accessToken = await this.jwtService.signAsync(user, {

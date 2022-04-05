@@ -36,7 +36,7 @@ export class User extends AggregateRoot {
   email: string;
 
   @Column({ name: 'token', type: 'simple-json', nullable: true })
-  token: Token;
+  token?: Token;
 
   // Add chat typeorm many to many relation with chat
   @ManyToMany(() => Chat, (chat) => chat.members)
