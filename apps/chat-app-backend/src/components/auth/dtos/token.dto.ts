@@ -8,7 +8,7 @@ export class TokenDto {
   refreshToken: string;
 
   @Expose()
-  expiresIn: Date;
+  expiresAt: Date;
 
   @Expose()
   type: string;

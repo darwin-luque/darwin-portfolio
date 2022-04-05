@@ -8,6 +8,6 @@ export interface CustomRequest extends Request {
 export interface Token {
   accessToken: string;
   refreshToken: string;
-  expiresIn: Date;
+  expiresAt: Date;
   type: 'Bearer';
 }

@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { TokenPayloadDto } from '../../components/auth/dtos/token-payload.dto';
 import { CustomRequest } from '../../utils/types';
+import moment = require('moment');
 
 @Injectable()
 export class SetUserMiddleware implements NestMiddleware {
@@ -23,8 +24,14 @@ export class SetUserMiddleware implements NestMiddleware {
           token
         );
 
-        const foundUser = await this.usersRepository.findOne({ where: { id } });
+        let foundUser = await this.usersRepository.findOne({ where: { id } });
 
+        if (
+          foundUser?.token?.accessToken !== token &&
+          moment(foundUser?.token?.expiresAt).isBefore()
+        ) {
+          foundUser = null;
+        }
         req.user = foundUser ?? undefined;
       }
     } catch {

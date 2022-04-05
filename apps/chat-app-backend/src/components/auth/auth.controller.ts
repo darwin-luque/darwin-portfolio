@@ -64,11 +64,13 @@ export class AuthController {
   }
 
   @Post('sign-out')
+  @UseGuards(AuthGuard)
   signout(@CurrentUser() user: User): Promise<void> {
     return this.commandBus.execute(new SignOutCommand(user.id));
   }
 
   @Get('me')
+  @UseGuards(AuthGuard)
   @Serialize(UserDto)
   @UseGuards(AuthGuard)
   me(@CurrentUser() user: User): User {

@@ -32,8 +32,8 @@ export class GenerateTokenHandler
       throw new Error(`User with id ${payload.id} not found`);
     }
 
-    if (user.token?.expiresIn) {
-      const hasValidToken = moment(user.token.expiresIn).isAfter();
+    if (user.token?.expiresAt) {
+      const hasValidToken = moment(user.token.expiresAt).isAfter();
 
       if (hasValidToken) {
         return user.token;
@@ -53,7 +53,7 @@ export class GenerateTokenHandler
     const token: Token = {
       accessToken,
       refreshToken,
-      expiresIn: new Date(time),
+      expiresAt: new Date(time),
       type: 'Bearer',
     };
 

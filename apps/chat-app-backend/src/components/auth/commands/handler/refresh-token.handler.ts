@@ -40,7 +40,7 @@ export class RefreshTokenHandler
     const token: Token = {
       accessToken,
       refreshToken: command.refreshToken,
-      expiresIn: new Date(time),
+      expiresAt: new Date(time),
       type: 'Bearer',
     };
 
