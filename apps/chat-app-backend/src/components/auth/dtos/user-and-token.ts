@@ -1,4 +1,5 @@
 import { Expose, Type } from 'class-transformer';
+import { TokenDto } from './token.dto';
 import { UserDto } from './user.dto';
 
 export class UserAndTokenDto {
@@ -6,6 +7,7 @@ export class UserAndTokenDto {
   @Expose()
   user: UserDto;
 
+  @Type(() => TokenDto)
   @Expose()
-  token: string;
+  token: TokenDto;
 }

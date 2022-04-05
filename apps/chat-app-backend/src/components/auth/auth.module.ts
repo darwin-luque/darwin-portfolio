@@ -14,8 +14,7 @@ import { QueryHandlers } from './queries/handlers';
     TypeOrmModule.forFeature([User]),
     CqrsModule,
     JwtModule.register({
-      secret: process.env['JWT_SECRET'],
-      signOptions: { expiresIn: '1h' },
+      secret: process.env['ACCESS_TOKEN_SECRET'],
     }),
   ],
   controllers: [AuthController],

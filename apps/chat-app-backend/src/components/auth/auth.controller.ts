@@ -11,10 +11,14 @@ import { UserAndTokenDto } from './dtos/user-and-token';
 import { SignInDto } from './dtos/sign-in.dto';
 import { SignUpDto } from './dtos/sign-up.dto';
 import { UserDto } from './dtos/user.dto';
+import { Token } from '../../utils/types';
+import { RefreshTokenDto } from './dtos/refresh-token.dto';
+import { TokenDto } from './dtos/token.dto';
+import { RefreshTokenCommand } from './commands/impl/refresh-token.command';
 
 interface UserAndToken {
   user: User;
-  token: string;
+  token: Token;
 }
 
 @Controller('auth')
@@ -27,10 +31,12 @@ export class AuthController {
   @Post('sign-up')
   @Serialize(UserAndTokenDto)
   async signup(@Body() body: SignUpDto): Promise<UserAndToken> {
-    const user = await this.commandBus.execute(
+    const user = await this.commandBus.execute<SignUpCommand, User>(
       new SignUpCommand(body.email, body.password, body.username)
     );
-    const token = await this.commandBus.execute(new GenerateTokenCommand(user));
+    const token = await this.commandBus.execute<GenerateTokenCommand, Token>(
+      new GenerateTokenCommand(user)
+    );
 
     return { user, token };
   }
@@ -41,11 +47,19 @@ export class AuthController {
     const user = await this.queryBus.execute<SignInQuery, User>(
       new SignInQuery(body.email, body.password)
     );
-    const token = await this.commandBus.execute<GenerateTokenCommand, string>(
+    const token = await this.commandBus.execute<GenerateTokenCommand, Token>(
       new GenerateTokenCommand(user)
     );
 
     return { user, token };
+  }
+
+  @Post('refresh-token')
+  @Serialize(TokenDto)
+  refreshToken(@Body() body: RefreshTokenDto): Promise<Token> {
+    return this.commandBus.execute<RefreshTokenCommand, Token>(
+      new RefreshTokenCommand(body.refreshToken)
+    );
   }
 
   @Get('me')

@@ -12,6 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserCreatedEvent } from '../../components/auth/events/impl/user-created.event';
+import { Token } from '../../utils/types';
 import { Chat } from './chat.entity';
 import { Message } from './message.entity';
 
@@ -33,6 +34,9 @@ export class User extends AggregateRoot {
   // Add email typeorm column
   @Column({ name: 'email' })
   email: string;
+
+  @Column({ name: 'token', type: 'simple-json', nullable: true })
+  token: Token;
 
   // Add chat typeorm many to many relation with chat
   @ManyToMany(() => Chat, (chat) => chat.members)
