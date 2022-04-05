@@ -1,5 +1,6 @@
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AuthModule } from './components/auth/auth.module';
 import { Message } from './infrastructure/entities/message.entity';
 import { User } from './infrastructure/entities/user.entity';
@@ -25,6 +26,10 @@ const configs: TypeOrmModuleOptions = {
     AuthModule,
     TypeOrmModule.forRoot(configs),
     TypeOrmModule.forFeature([User]),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
   ],
   controllers: [],
   providers: [],
