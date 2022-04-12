@@ -8,6 +8,7 @@ import { EventHandlers } from './events/handlers';
 import { JwtModule } from '@nestjs/jwt';
 import { SetUserMiddleware } from '../../infrastructure/middlewares/set-user.middleware';
 import { QueryHandlers } from './queries/handlers';
+import { CreateUserSaga } from './sagas/create-user.saga';
 
 @Module({
   imports: [
@@ -18,7 +19,12 @@ import { QueryHandlers } from './queries/handlers';
     }),
   ],
   controllers: [AuthController],
-  providers: [...CommandHandlers, ...QueryHandlers, ...EventHandlers],
+  providers: [
+    ...CommandHandlers,
+    ...QueryHandlers,
+    ...EventHandlers,
+    CreateUserSaga,
+  ],
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
