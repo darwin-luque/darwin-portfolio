@@ -5,6 +5,7 @@ import { AuthModule } from './components/auth/auth.module';
 import { Message } from './infrastructure/entities/message.entity';
 import { User } from './infrastructure/entities/user.entity';
 import { Chat } from './infrastructure/entities/chat.entity';
+import { ChatModule } from './components/chat/chat.module';
 
 const configs: TypeOrmModuleOptions = {
   synchronize: process.env.NODE_ENV === 'development',
@@ -30,6 +31,7 @@ const configs: TypeOrmModuleOptions = {
       ttl: 60,
       limit: 10,
     }),
+    ChatModule,
   ],
   controllers: [],
   providers: [],
