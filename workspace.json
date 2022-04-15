@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "chat-app-backend": "apps/chat-app-backend",
+    "movies-app": "apps/movies-app",
+    "movies-app-e2e": "apps/movies-app-e2e",
     "react-hook": "libs/react/hooks",
     "react-ui": "libs/react/ui",
     "spotify-consumer": "apps/spotify-consumer",
