@@ -64,7 +64,7 @@
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
     "rxjs": "^7.0.0",
-    "solid-app-router": "^0.3.0",
+    "solid-app-router": "^0.3.2",
     "tslib": "^2.0.0",
     "typeorm": "^0.3.4",
     "ws": "^8.5.0"
