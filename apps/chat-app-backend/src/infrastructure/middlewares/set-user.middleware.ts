@@ -18,6 +18,7 @@ export class SetUserMiddleware implements NestMiddleware {
   async use(req: CustomRequest, _res: never, next: NextFunction) {
     try {
       const token = req.headers.authorization?.replace('Bearer ', '');
+      console.log(token);
 
       if (token) {
         const { id } = await this.jwtService.verifyAsync<TokenPayloadDto>(
