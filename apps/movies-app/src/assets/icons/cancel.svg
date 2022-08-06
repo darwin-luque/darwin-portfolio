@@ -1,0 +1,17 @@
+<svg
+  data-testid="x-icon"
+  viewBox="0 0 24 24"
+  role="presentation"
+  width="32"
+  height="32"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <path
+    d="M17 7L7 17M7 7l5.03 5.03L17 17"
+    fill="transparent"
+    strokeWidth="2"
+    stroke="#fff"
+    strokeLinecap="round"
+  />
+</svg>

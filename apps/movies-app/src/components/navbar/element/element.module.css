@@ -1,0 +1,20 @@
+.element {
+  margin-left: clamp(1rem, 2.5vw, 2rem);
+  transition: transform 0.1s ease;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.element:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.element a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.element a:visited {
+  color: inherit;
+}
